@@ -88,12 +88,12 @@
   .proj-meta { font-size: 13px; color: var(--blue); margin-bottom: 12px; }
   .proj-title { font-size: clamp(28px, 4vw, 48px); font-weight: 800; color: var(--text); line-height: 1.1; margin-bottom: 16px; letter-spacing: -0.01em; }
   .proj-desc { font-size: 16px; color: var(--text-dim); line-height: 1.8; max-width: 720px; }
-  .proj-body { padding: 48px var(--pad); }
+  .proj-body { padding: 48px var(--pad); max-width: 1400px; margin: 0 auto; width: 75%; }
   .proj-body h2 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 14px; margin-top: 40px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
   .proj-body h2:first-child { margin-top: 0; }
-  .proj-body p { font-size: 15px; color: var(--text-dim); line-height: 1.85; margin-bottom: 16px; max-width: 760px; }
+  .proj-body p { font-size: 15px; color: var(--text-dim); line-height: 1.85; margin-bottom: 16px; }
   .proj-body ul { padding-left: 20px; margin-bottom: 16px; }
-  .proj-body li { font-size: 15px; color: var(--text-dim); line-height: 1.85; margin-bottom: 6px; max-width: 740px; }
+  .proj-body li { font-size: 15px; color: var(--text-dim); line-height: 1.85; margin-bottom: 6px; }
 
   /* MEDIA */
   .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 16px; width: 100%; }
@@ -109,6 +109,7 @@
   .page-title { font-size: clamp(36px, 5vw, 56px); font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 10px; }
   .page-sub { font-size: 15px; color: var(--text-dim); max-width: 580px; line-height: 1.7; }
   .skill-group { border-bottom: 1px solid var(--line); padding: 24px var(--pad); }
+  .skill-group-inner { max-width: 1400px; margin: 0 auto; width: 75%; }
   .skill-group-lbl { font-size: 11px; font-weight: 700; color: var(--blue); letter-spacing: 0.12em; margin-bottom: 16px; }
   .skill-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--line2); }
   .skill-item:last-child { border-bottom: none; }
@@ -117,7 +118,7 @@
   .skill-level { font-size: 11px; color: var(--blue); flex-shrink: 0; margin-left: 20px; margin-top: 3px; }
 
   /* ABOUT */
-  .text-body { padding: 48px var(--pad); max-width: 900px; }
+  .text-body { padding: 48px var(--pad); max-width: 1400px; margin: 0 auto; width: 75%; }
   .text-body h2 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 14px; margin-top: 40px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
   .text-body h2:first-child { margin-top: 0; }
   .text-body p { font-size: 15px; color: var(--text-dim); line-height: 1.85; margin-bottom: 14px; }
@@ -140,6 +141,9 @@
     .hero-name { font-size: 40px; }
     .media-5col { grid-template-columns: repeat(2, 1fr); }
     .media-grid-2col { grid-template-columns: 1fr; }
+    .proj-body { width: 100%; }
+    .skill-group-inner { width: 100%; }
+    .text-body { width: 100%; }
   }
 </style>
 </head>
@@ -534,6 +538,7 @@
   </div>
 
   <div class="skill-group">
+    <div class="skill-group-inner">
     <div class="skill-group-lbl">SOFTWARE</div>
     <div class="skill-item"><div><div class="skill-name">MATLAB and Simulink</div><div class="skill-desc">Primary simulation environment for RTMUAV controller development, adaptive gain tuning, and LFL filter validation against wind and sensor disturbances.</div></div><span class="skill-level">Proficient</span></div>
     <div class="skill-item"><div><div class="skill-name">CATIA 3DExperience</div><div class="skill-desc">Surface modeling for aerodynamic bodywork optimization for Formula SAE, and full F1 car CAD development using Generative Shape Design.</div></div><span class="skill-level">Proficient</span></div>
@@ -545,9 +550,11 @@
     <div class="skill-item"><div><div class="skill-name">Abaqus FEA</div><div class="skill-desc">Finite element analysis for structural simulation coursework and design validation.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">SolidWorks</div><div class="skill-desc">3D CAD modeling for mechanical design and component development.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">JavaScript / HTML / CSS</div><div class="skill-desc">Web development, including this portfolio site.</div></div><span class="skill-level">Intermediate</span></div>
+    </div>
   </div>
 
   <div class="skill-group">
+    <div class="skill-group-inner">
     <div class="skill-group-lbl">ENGINEERING DISCIPLINES</div>
     <div class="skill-item"><div><div class="skill-name">Control Systems Design</div><div class="skill-desc">Geometric controller design with state-switching logic and adaptive gains for the RTMUAV system, validated against real-world disturbances.</div></div><span class="skill-level">Proficient</span></div>
     <div class="skill-item"><div><div class="skill-name">UAV Dynamics and Navigation</div><div class="skill-desc">Full coupled dynamic modeling of UAV, tether, and payload interactions across slack and taut tether states, including nonlinear effects.</div></div><span class="skill-level">Proficient</span></div>
@@ -560,21 +567,26 @@
     <div class="skill-item"><div><div class="skill-name">Finite Element Analysis</div><div class="skill-desc">Structural simulation and design validation using Abaqus, with coursework in FEA methods and applications.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">Sensor and Data Acquisition</div><div class="skill-desc">Rotary sensor integration and tension measurement systems for the RTMUAV reeling platform.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">Wind Tunnel Testing</div><div class="skill-desc">Experimental aerodynamic testing and result analysis for design validation.</div></div><span class="skill-level">Intermediate</span></div>
+    </div>
   </div>
 
   <div class="skill-group">
+    <div class="skill-group-inner">
     <div class="skill-group-lbl">MANUFACTURING AND FABRICATION</div>
     <div class="skill-item"><div><div class="skill-name">Carbon Fiber Fabrication</div><div class="skill-desc">Wet layup, autoclave processing, and fiberglass fabrication for aerodynamic bodywork components.</div></div><span class="skill-level">Beginner</span></div>
     <div class="skill-item"><div><div class="skill-name">3D Printing and Rapid Prototyping</div><div class="skill-desc">FDM printing for test apparatus fabrication, including a 3D-printed honeycomb DPF model for research hardware.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">Circuit Design and Soldering</div><div class="skill-desc">End-to-end hardware fabrication for research test apparatus, including circuit design and soldering.</div></div><span class="skill-level">Intermediate</span></div>
+    </div>
   </div>
 
   <div class="skill-group">
+    <div class="skill-group-inner">
     <div class="skill-group-lbl">PROFESSIONAL</div>
     <div class="skill-item"><div><div class="skill-name">Team Leadership and Project Management</div><div class="skill-desc">Led a team of 8 engineers as Aerodynamics Team Lead for USC Formula SAE, including recruitment, onboarding curriculum, and sponsorship coordination.</div></div><span class="skill-level">Proficient</span></div>
     <div class="skill-item"><div><div class="skill-name">Technical Writing and Research</div><div class="skill-desc">Research papers, posters, and presentations across IMECE 2025, Discover USC 2026, SCJAS, and JSHS.</div></div><span class="skill-level">Proficient</span></div>
     <div class="skill-item"><div><div class="skill-name">Data Analysis</div><div class="skill-desc">Quantitative analysis of CFD results, simulation outputs, and experimental data across research and project work.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">Microsoft Excel</div><div class="skill-desc">Data organization, analysis, and reporting for engineering and research applications.</div></div><span class="skill-level">Proficient</span></div>
+    </div>
   </div>
 
   <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
