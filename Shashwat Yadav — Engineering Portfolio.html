@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shashwat Yadav — Aerospace Engineering</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c14;
+    --bg2: #0d1320;
+    --bg3: #111827;
+    --line: #1e2d45;
+    --blue: #3b82f6;
+    --blue-dim: #1d4ed8;
+    --text: #e2e8f0;
+    --text-dim: #64748b;
+    --text-mid: #94a3b8;
+    --white: #f8fafc;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 60px;
+    background: rgba(8,12,20,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px;
+    letter-spacing: 0.04em; color: var(--white); cursor: pointer;
+  }
+  .nav-logo span { color: var(--blue); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--text-mid);
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+
+  /* ── PAGES ── */
+  .page { display: none; padding-top: 60px; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ── HOME ── */
+  .hero {
+    min-height: calc(100vh - 60px);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 48px;
+    border-bottom: 1px solid var(--line);
+    position: relative; overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image:
+      linear-gradient(var(--blue) 1px, transparent 1px),
+      linear-gradient(90deg, var(--blue) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-tag {
+    font-size: 12px; font-weight: 500; color: var(--blue);
+    letter-spacing: 0.12em; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 700; line-height: 1.0;
+    color: var(--white); max-width: 14ch;
+    margin-bottom: 28px;
+  }
+  .hero-desc {
+    font-size: 16px; color: var(--text-mid); max-width: 52ch; line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  .hero-stats {
+    display: flex; gap: 48px; margin-bottom: 48px;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px; font-weight: 700; color: var(--white);
+  }
+  .stat-label { font-size: 12px; color: var(--text-dim); letter-spacing: 0.06em; }
+  .btn {
+    display: inline-block; padding: 12px 28px;
+    background: var(--blue); color: var(--white);
+    font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: var(--blue-dim); }
+  .btn-ghost {
+    background: transparent; border: 1px solid var(--line);
+    color: var(--text-mid); margin-left: 12px;
+  }
+  .btn-ghost:hover { border-color: var(--blue); color: var(--white); background: transparent; }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 80px 48px; border-bottom: 1px solid var(--line); }
+  .section-label {
+    font-size: 11px; font-weight: 600; color: var(--blue);
+    letter-spacing: 0.14em; margin-bottom: 40px;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 3vw, 40px); font-weight: 700;
+    color: var(--white); margin-bottom: 16px;
+  }
+  .section-sub { font-size: 15px; color: var(--text-mid); max-width: 60ch; margin-bottom: 48px; }
+
+  /* ── PROJECT CARDS ── */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1px;
+    background: var(--line);
+  }
+  .project-card {
+    background: var(--bg); padding: 36px;
+    cursor: pointer; transition: background 0.2s;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .project-card:hover { background: var(--bg2); }
+  .project-card:hover .card-arrow { color: var(--blue); }
+  .card-meta { font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; }
+  .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px; font-weight: 600; color: var(--white); line-height: 1.3;
+  }
+  .card-desc { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+  .tag {
+    font-size: 11px; padding: 4px 10px;
+    border: 1px solid var(--line); color: var(--text-dim);
+  }
+  .card-arrow { font-size: 18px; color: var(--text-dim); align-self: flex-end; transition: color 0.2s; }
+
+  /* ── ABOUT SECTION ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .about-text p { font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 20px; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .skills-block { display: flex; flex-direction: column; gap: 28px; }
+  .skill-group-label { font-size: 11px; color: var(--blue); letter-spacing: 0.1em; margin-bottom: 12px; }
+  .skill-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-pill {
+    font-size: 12px; padding: 5px 12px;
+    background: var(--bg3); color: var(--text-mid);
+    border: 1px solid var(--line);
+  }
+
+  /* ── AWARDS ── */
+  .awards-list { display: flex; flex-direction: column; gap: 0; }
+  .award-item {
+    display: flex; align-items: baseline; gap: 24px;
+    padding: 20px 0; border-bottom: 1px solid var(--line);
+  }
+  .award-year { font-size: 13px; color: var(--blue); font-variant-numeric: tabular-nums; min-width: 40px; }
+  .award-name { font-size: 15px; color: var(--text); }
+  .award-org { font-size: 13px; color: var(--text-dim); }
+
+  /* ── PROJECT DETAIL PAGE ── */
+  .project-hero {
+    padding: 80px 48px 48px;
+    border-bottom: 1px solid var(--line);
+  }
+  .back-btn {
+    font-size: 13px; color: var(--text-dim); background: none; border: none;
+    cursor: pointer; margin-bottom: 40px; display: flex; align-items: center; gap: 8px;
+    padding: 0; transition: color 0.2s;
+  }
+  .back-btn:hover { color: var(--blue); }
+  .project-hero-meta { font-size: 12px; color: var(--blue); letter-spacing: 0.1em; margin-bottom: 16px; }
+  .project-hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(32px, 4vw, 56px); font-weight: 700;
+    color: var(--white); line-height: 1.1; max-width: 20ch; margin-bottom: 20px;
+  }
+  .project-hero-desc { font-size: 16px; color: var(--text-mid); max-width: 60ch; line-height: 1.75; }
+
+  .project-body { padding: 64px 48px; }
+  .project-body h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px; font-weight: 600; color: var(--white);
+    margin-bottom: 16px; margin-top: 48px;
+  }
+  .project-body h2:first-child { margin-top: 0; }
+  .project-body p { font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 16px; max-width: 70ch; }
+  .project-body ul { padding-left: 20px; margin-bottom: 20px; }
+  .project-body li { font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 6px; max-width: 68ch; }
+
+  /* ── MEDIA GALLERY ── */
+  .media-section { padding: 0 48px 64px; }
+  .media-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px; font-weight: 600; color: var(--white);
+    margin-bottom: 28px; padding-top: 48px;
+    border-top: 1px solid var(--line);
+  }
+  .media-upload-zone {
+    border: 1px dashed var(--line); padding: 48px;
+    text-align: center; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 24px;
+  }
+  .media-upload-zone:hover { border-color: var(--blue); background: rgba(59,130,246,0.03); }
+  .media-upload-zone input { display: none; }
+  .upload-icon { font-size: 28px; margin-bottom: 12px; }
+  .upload-text { font-size: 14px; color: var(--text-dim); }
+  .upload-text span { color: var(--blue); cursor: pointer; }
+  .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .media-item { position: relative; aspect-ratio: 16/10; overflow: hidden; background: var(--bg3); cursor: pointer; }
+  .media-item img, .media-item video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .media-item .media-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(8,12,20,0.8); padding: 8px 12px;
+    font-size: 12px; color: var(--text-mid);
+  }
+  .media-item .remove-btn {
+    position: absolute; top: 8px; right: 8px;
+    background: rgba(8,12,20,0.8); border: none; color: var(--text-dim);
+    width: 28px; height: 28px; cursor: pointer; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .media-item:hover .remove-btn { opacity: 1; }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.95); align-items: center; justify-content: center;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+  .lightbox-inner img, .lightbox-inner video { max-width: 90vw; max-height: 85vh; object-fit: contain; }
+  .lightbox-close {
+    position: absolute; top: -40px; right: 0;
+    background: none; border: none; color: var(--text-mid);
+    font-size: 24px; cursor: pointer;
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .contact-info p { font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 28px; }
+  .contact-links { display: flex; flex-direction: column; gap: 16px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 16px;
+    font-size: 14px; color: var(--text-mid); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--blue); }
+  .contact-link-icon { font-size: 16px; min-width: 20px; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .hero, section { padding-left: 20px; padding-right: 20px; }
+    .hero-stats { flex-wrap: wrap; gap: 28px; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .project-hero, .project-body, .media-section { padding-left: 20px; padding-right: 20px; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">SY<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showPage('projects')" id="nav-projects">Projects</a></li>
+    <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════ HOME ═══════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-tag">Aerospace Engineering · University of South Carolina</div>
+    <h1>Shashwat Yadav</h1>
+    <p class="hero-desc">
+      Control systems, computational aerodynamics, and UAV dynamics. Building things that fly, race, and push the edge of what current engineering can reliably solve.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">4.0</span>
+        <span class="stat-label">GPA · Honors College</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">20+</span>
+        <span class="stat-label">CFD Simulations</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Research Awards</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2028</span>
+        <span class="stat-label">Graduation</span>
+      </div>
+    </div>
+    <div>
+      <button class="btn" onclick="showPage('projects')">View Projects</button>
+      <button class="btn btn-ghost" onclick="showPage('contact')">Get in Touch</button>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-label">Selected Work</div>
+    <div class="projects-grid">
+      <div class="project-card" onclick="showProject('rtmuav')">
+        <div class="card-meta">Jan 2025 — Present · USC Dynamics & Control Lab</div>
+        <div class="card-title">Robust Control Framework for Retractable Tether Multirotor UAVs</div>
+        <div class="card-desc">Geometric controller for RTMUAV systems handling the unsolved slack-to-taut tether transition problem under real-world disturbances.</div>
+        <div class="card-tags">
+          <span class="tag">MATLAB</span>
+          <span class="tag">Python</span>
+          <span class="tag">Adaptive Control</span>
+          <span class="tag">UAV Dynamics</span>
+        </div>
+        <div class="card-arrow">↗</div>
+      </div>
+      <div class="project-card" onclick="showProject('fsae')">
+        <div class="card-meta">May 2025 — Present · Society of Automotive Engineers, USC</div>
+        <div class="card-title">Aerodynamics Team Lead — Formula SAE</div>
+        <div class="card-desc">Re-established the USC FSAE program from scratch, leading a team of 8 engineers designing a full aero package targeting FSAE Michigan 2027.</div>
+        <div class="card-tags">
+          <span class="tag">ANSYS Fluent</span>
+          <span class="tag">CREO Parametric</span>
+          <span class="tag">CATIA</span>
+          <span class="tag">CFD</span>
+        </div>
+        <div class="card-arrow">↗</div>
+      </div>
+      <div class="project-card" onclick="showProject('f1cfd')">
+        <div class="card-meta">Jun 2026 — Oct 2026 · Personal Project</div>
+        <div class="card-title">CFD Study of Crosswind / Yaw Effect on F1 Aerodynamics</div>
+        <div class="card-desc">Five OpenFOAM simulations across 0–8° yaw angles on a 2026-regulation F1 car, studying L/D degradation, moment coefficients, and flow separation.</div>
+        <div class="card-tags">
+          <span class="tag">OpenFOAM</span>
+          <span class="tag">CATIA GSD</span>
+          <span class="tag">kOmegaSST</span>
+          <span class="tag">Rotating MRF</span>
+        </div>
+        <div class="card-arrow">↗</div>
+      </div>
+      <div class="project-card" onclick="showProject('early')">
+        <div class="card-meta">2021 — 2023 · Spring Valley High School</div>
+        <div class="card-title">Early Research — DPF Filtration & Nanoparticle Toxicity</div>
+        <div class="card-desc">Two independent research projects presented at SCJAS, JSHS, and the UofSC Science & Engineering Fair.</div>
+        <div class="card-tags">
+          <span class="tag">Experimental Design</span>
+          <span class="tag">Hardware Fabrication</span>
+          <span class="tag">3D Printing</span>
+        </div>
+        <div class="card-arrow">↗</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Recognition</div>
+    <div class="awards-list">
+      <div class="award-item">
+        <span class="award-year">2026</span>
+        <div>
+          <div class="award-name">NASA SC Space Grant Consortium — Undergraduate Research Award</div>
+          <div class="award-org">RTMUAV Control Research</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <span class="award-year">2025</span>
+        <div>
+          <div class="award-name">2nd Place — ASME Undergraduate Expo, IMECE 2025</div>
+          <div class="award-org">RTMUAV Control Research</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <span class="award-year">2025</span>
+        <div>
+          <div class="award-name">Magellan Mini Undergraduate Research Grant</div>
+          <div class="award-org">University of South Carolina</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <span class="award-year">2022</span>
+        <div>
+          <div class="award-name">Metric System Award — SCJAS</div>
+          <div class="award-org">South Carolina Junior Academy of Science</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════ PROJECTS LIST ═══════════════════════════════════ -->
+<div id="page-projects" class="page">
+  <section>
+    <div class="section-label">All Projects</div>
+    <div class="section-title">Engineering Work</div>
+    <p class="section-sub">From active controls research to computational aerodynamics — each project documented from concept through simulation to hardware.</p>
+    <div class="projects-grid">
+      <div class="project-card" onclick="showProject('rtmuav')">
+        <div class="card-meta">Jan 2025 — Present · USC Dynamics & Control Lab</div>
+        <div class="card-title">Robust Control Framework for Retractable Tether Multirotor UAVs</div>
+        <div class="card-desc">Geometric controller for RTMUAV systems handling the unsolved slack-to-taut tether transition problem under real-world disturbances.</div>
+        <div class="card-tags">
+          <span class="tag">MATLAB</span><span class="tag">Python</span>
+          <span class="tag">Adaptive Control</span><span class="tag">UAV Dynamics</span>
+        </div>
+        <div class="card-arrow">↗</div>
+      </div>
+      <div class="project-card" onclick="showProject('fsae')">
+        <div class="card-meta">May 2025 — Present · SAE at USC</div>
+        <div class="card-title">Aerodynamics Team Lead — Formula SAE</div>
+        <div class="card-desc">Re-established USC FSAE from scratch, leading 8 engineers designing a full aero package targeting FSAE Michigan 2027.</div>
+        <div class="card-tags">
+          <span class="tag">ANSYS Fluent</span><span class="tag">CREO Parametric</span>
+          <span class="tag">CATIA</span><span class="tag">CFD</span>
+        </div>
+        <div class="card-arrow">↗</div>
+      </div>
+      <div class="project-card" onclick="showProject('f1cfd')">
+        <div class="card-meta">Jun 2026 — Oct 2026 · Personal Project</div>
+        <div class="card-title">CFD Study of Crosswind / Yaw Effect on F1 Aerodynamics</div>
+        <div class="card-desc">Five OpenFOAM simulations across 0–8° yaw angles on a 2026-reg F1 car model built in CATIA Generative Shape Design.</div>
+        <div class="card-tags">
+          <span class="tag">OpenFOAM</span><span class="tag">CATIA GSD</span>
+          <span class="tag">kOmegaSST</span><span class="tag">Rotating MRF</span>
+        </div>
+        <div class="card-arrow">↗</div>
+      </div>
+      <div class="project-card" onclick="showProject('early')">
+        <div class="card-meta">2021 — 2023 · Spring Valley High School</div>
+        <div class="card-title">Early Research</div>
+        <div class="card-desc">DPF soot filtration apparatus and nanoparticle toxicity study — presented at SCJAS, JSHS, and UofSC Science & Engineering Fair.</div>
+        <div class="card-tags">
+          <span class="tag">Experimental Design</span><span class="tag">Hardware Fab</span>
+          <span class="tag">3D Printing</span>
+        </div>
+        <div class="card-arrow">↗</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════ PROJECT DETAIL PAGES ═══════════════════════════════════ -->
+
+<!-- RTMUAV -->
+<div id="page-project-rtmuav" class="page">
+  <div class="project-hero">
+    <button class="back-btn" onclick="showPage('projects')">← Back to Projects</button>
+    <div class="project-hero-meta">Jan 2025 — Present · Dynamics and Control Lab, University of South Carolina</div>
+    <h1>Robust Control Framework for Retractable Tether Multirotor UAVs</h1>
+    <p class="project-hero-desc">Developing a controller capable of maintaining UAV stability through the slack-to-taut tether transition — a controls problem that currently has no reliable solution — enabling expanded use of RTMUAVs in high-risk persistent aerial operations.</p>
+  </div>
+  <div class="project-body">
+    <h2>Problem</h2>
+    <p>Tethered UAV systems offer compelling advantages for persistent operations, but retractable tethers introduce a fundamentally difficult stability problem: the system must remain controlled as the tether dynamically transitions between a slack (unconstrained) and taut (tension-loaded) state. No controller framework capable of handling both states robustly in high-risk situations existed prior to this work.</p>
+    <h2>System Modeling</h2>
+    <ul>
+      <li>Developed a fully coupled dynamic model of the UAV, tether, and payload as a unified system, capturing nonlinear interactions across both tether states</li>
+      <li>Tether modeled under both slack and taut conditions using a spring-damper model and multilink representation for improved fidelity</li>
+      <li>State-switching logic with adaptive gains to handle transition dynamics that destabilize conventional controllers</li>
+    </ul>
+    <h2>Controller Design</h2>
+    <ul>
+      <li>Geometric controller with adaptive gains validated in MATLAB against wind disturbances and sensor noise</li>
+      <li>Implemented Low Frequency Learning (LFL) filter — filters high-frequency noise by comparison to a weight estimate, eliminating leakage bias</li>
+      <li>LFL outperforms standard MRAC: tracks more precisely, requires less control rate effort, at the same learning rate</li>
+      <li>Constructed Python simulation environment mapping expected flight envelopes to safety/clearance regions</li>
+    </ul>
+    <h2>Disturbance Modeling</h2>
+    <ul>
+      <li>8-tone gust field applied throughout testing</li>
+      <li>Sensor noise included in tension feedback term</li>
+      <li>Randomized simulations used to extract 95th-percentile excursion envelopes across tether lengths of 2–6 m</li>
+    </ul>
+    <h2>Reeling Platform</h2>
+    <ul>
+      <li>Novel reeling system under 500–800 g tracking tether tension and direction in real time</li>
+      <li>Two-axis gimbal with rotary sensors for tether direction; reel-rotation sensor for deployment and retrieval tracking</li>
+      <li>Provides near-end tension values needed for onboard controller calculations</li>
+    </ul>
+    <h2>Awards & Presentations</h2>
+    <ul>
+      <li>NASA SC Space Grant Consortium Undergraduate Research Award — 2026</li>
+      <li>2nd Place · IMECE 2025 ASME Undergraduate Expo</li>
+      <li>Magellan Mini Undergraduate Research Grant — 2025</li>
+      <li>Presented at IMECE 2025 ASME Undergraduate Expo and Discover USC 2026</li>
+    </ul>
+  </div>
+  <div class="media-section">
+    <h2>Media</h2>
+    <div class="media-upload-zone" onclick="document.getElementById('upload-rtmuav').click()">
+      <input type="file" id="upload-rtmuav" multiple accept="image/*,video/*" onchange="handleUpload(event, 'rtmuav')">
+      <div class="upload-icon">⊕</div>
+      <div class="upload-text">Drop images or videos here, or <span>browse files</span></div>
+    </div>
+    <div class="media-grid" id="media-rtmuav"></div>
+  </div>
+</div>
+
+<!-- FSAE -->
+<div id="page-project-fsae" class="page">
+  <div class="project-hero">
+    <button class="back-btn" onclick="showPage('projects')">← Back to Projects</button>
+    <div class="project-hero-meta">May 2025 — Present · Society of Automotive Engineers, University of South Carolina</div>
+    <h1>Aerodynamics Team Lead — Formula SAE</h1>
+    <p class="project-hero-desc">Re-established the USC Formula SAE program from the ground up, leading a team of 8 engineers in designing a full aerodynamic package targeting FSAE Michigan 2027.</p>
+  </div>
+  <div class="project-body">
+    <h2>Program Development</h2>
+    <ul>
+      <li>Re-established the USC FSAE program from scratch — recruiting, organizing, and leading a team of 8 aerodynamics engineers</li>
+      <li>Procured materials and tools, secured college funding and facility access, and drove industry sponsorships</li>
+      <li>Developed onboarding curriculum to train new members on ANSYS Fluent, building team-wide simulation competency from zero</li>
+    </ul>
+    <h2>Aerodynamic Package Design</h2>
+    <ul>
+      <li>Leading full external aerodynamic package design: front wing, rear wing, nose, and sidepods</li>
+      <li>Surface modeling in CATIA 3DExperience to explore and optimize bodywork geometry prior to committing to CAD-defined surfaces</li>
+      <li>Built full vehicle CAD assemblies in CREO Parametric, integrating aero components with chassis and suspension geometry for packaging compatibility</li>
+      <li>100+ hours of CREO Parametric experience; 20+ hours of CATIA 3DExperience</li>
+    </ul>
+    <h2>Computational Fluid Dynamics</h2>
+    <ul>
+      <li>Executed 20+ ANSYS Fluent CFD simulations across iterative bodywork configurations</li>
+      <li>Led team study sessions on turbulence model selection and use</li>
+      <li>Analyzed vorticity, total pressure loss, and flow profile results across configurations</li>
+    </ul>
+    <h2>Manufacturing</h2>
+    <ul>
+      <li>Composite manufacturing exposure: carbon fiber wet layup, autoclave processing, fiberglass fabrication</li>
+      <li>Evaluated material trade-offs between aluminum, fiberglass, and carbon fiber under limited cost budget</li>
+      <li>Assembled and mounted components on a go-kart development mule for hands-on mechanical familiarity</li>
+    </ul>
+  </div>
+  <div class="media-section">
+    <h2>Media</h2>
+    <div class="media-upload-zone" onclick="document.getElementById('upload-fsae').click()">
+      <input type="file" id="upload-fsae" multiple accept="image/*,video/*" onchange="handleUpload(event, 'fsae')">
+      <div class="upload-icon">⊕</div>
+      <div class="upload-text">Drop images or videos here, or <span>browse files</span></div>
+    </div>
+    <div class="media-grid" id="media-fsae"></div>
+  </div>
+</div>
+
+<!-- F1 CFD -->
+<div id="page-project-f1cfd" class="page">
+  <div class="project-hero">
+    <button class="back-btn" onclick="showPage('projects')">← Back to Projects</button>
+    <div class="project-hero-meta">Jun 2026 — Oct 2026 · Personal Project</div>
+    <h1>CFD Study of Crosswind / Yaw Effect on F1 Aerodynamics</h1>
+    <p class="project-hero-desc">Five OpenFOAM simulations across 0–8° yaw angles on a CAD model built to 2026 F1 regulations, studying how crosswinds affect downforce, drag, and aerodynamic center.</p>
+  </div>
+  <div class="project-body">
+    <h2>Motivation</h2>
+    <p>Formula 1 represents the extreme edge of aerodynamic engineering — where tenths-of-a-second performance margins matter. This personal project was designed to build deeper understanding of F1 aerodynamics beyond typical straight-line analysis, specifically studying how crosswinds affect overall car behavior.</p>
+    <h2>CAD Model Development</h2>
+    <ul>
+      <li>Built using CATIA Generative Shape Design to 2026 F1 regulations, with some lenient constraints</li>
+      <li>Focused on downforce and drag considerations for the underbody, front wing, and rear wing</li>
+      <li>Design cross-referenced against comparable team models to validate geometry</li>
+    </ul>
+    <h2>CFD Setup</h2>
+    <ul>
+      <li>All simulations run in OpenFOAM</li>
+      <li>Car velocity: 80,000 mm/s; airflow velocity held at constant magnitude across yaw angles to conserve dynamic pressure</li>
+      <li>Rotating MRFs applied to all four wheels</li>
+      <li>kOmegaSST turbulence model selected to capture vortex development, flow separation, and viscous effects under yawing conditions</li>
+      <li>Ground velocity matched to car y-velocity only</li>
+    </ul>
+    <h2>Results</h2>
+    <ul>
+      <li>CL and CD both increase proportionally with yaw angle, with CD increasing slightly faster</li>
+      <li>Causes a slight downward drift in L/D ratio across the range</li>
+      <li>Conclusion: crosswinds up to 8° have minimal effect on overall L/D; primary effects are on yawing moments, lateral forces, and aerodynamic center shift</li>
+    </ul>
+  </div>
+  <div class="media-section">
+    <h2>Media</h2>
+    <div class="media-upload-zone" onclick="document.getElementById('upload-f1cfd').click()">
+      <input type="file" id="upload-f1cfd" multiple accept="image/*,video/*" onchange="handleUpload(event, 'f1cfd')">
+      <div class="upload-icon">⊕</div>
+      <div class="upload-text">Drop images or videos here, or <span>browse files</span></div>
+    </div>
+    <div class="media-grid" id="media-f1cfd"></div>
+  </div>
+</div>
+
+<!-- EARLY RESEARCH -->
+<div id="page-project-early" class="page">
+  <div class="project-hero">
+    <button class="back-btn" onclick="showPage('projects')">← Back to Projects</button>
+    <div class="project-hero-meta">2021 — 2023 · Spring Valley High School</div>
+    <h1>Early Research</h1>
+    <p class="project-hero-desc">Two independent research projects conducted in high school, both presented at competitive science fairs and recognized with awards.</p>
+  </div>
+  <div class="project-body">
+    <h2>Diesel Particulate Filter Soot Removal — 2022/23</h2>
+    <p>Designed and built a small-scale test apparatus to evaluate whether a charged particulate filter could more efficiently remove soot from diesel particulate filters. Used carbon black as a soot surrogate, steel wool electrodes, and a 3D-printed honeycomb DPF model.</p>
+    <ul>
+      <li>Developed hands-on skills in soldering, circuit design, and 3D printing through end-to-end hardware fabrication</li>
+      <li>Identified more realistic flow conditions as the key variable requiring future investigation</li>
+      <li>Presented at SCJAS 2023, JSHS 2024, and UofSC Science & Engineering Fair 2023</li>
+    </ul>
+    <h2>Nanoparticle Toxicity on Soil & Plant Growth — 2021/22</h2>
+    <p>Designed a controlled 3-week exposure experiment assessing MgO/TiO₂ nanoparticle mixture toxicity across two concentration levels, measuring soil pH, salinity, and plant height in Vigna radiata.</p>
+    <ul>
+      <li>Found consistent adverse effects — increased soil pH and reduced plant growth — at both concentration levels</li>
+      <li>Contributed environmental impact data relevant to agricultural nanoparticle applications</li>
+      <li>Presented at SCJAS 2022 and UofSC Science & Engineering Fair 2022</li>
+      <li>Received Metric System Award at SCJAS 2022</li>
+    </ul>
+  </div>
+  <div class="media-section">
+    <h2>Media</h2>
+    <div class="media-upload-zone" onclick="document.getElementById('upload-early').click()">
+      <input type="file" id="upload-early" multiple accept="image/*,video/*" onchange="handleUpload(event, 'early')">
+      <div class="upload-icon">⊕</div>
+      <div class="upload-text">Drop images or videos here, or <span>browse files</span></div>
+    </div>
+    <div class="media-grid" id="media-early"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ ABOUT ═══════════════════════════════════ -->
+<div id="page-about" class="page">
+  <section>
+    <div class="section-label">About</div>
+    <div class="section-title">Shashwat Yadav</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm an aerospace engineering student at the University of South Carolina Honors College, graduating in 2028 with a 4.0 GPA. My minors span electrical engineering, mechanical engineering, and nuclear engineering — a combination that reflects my interest in problems that don't fit neatly into one discipline.</p>
+        <p>My work sits at the intersection of dynamics, control systems, and aerodynamics. At the Dynamics and Control Lab, I'm developing control frameworks for retractable tether UAV systems — a class of problems where no reliable solution currently exists. On the motorsport side, I'm leading the aerodynamics effort for the USC Formula SAE team, building a full aero package from scratch for FSAE Michigan 2027.</p>
+        <p>I'm drawn to organizations operating at the limits of flight, propulsion, and high-speed vehicles — in space, on a racetrack, or anywhere in between.</p>
+        <p>US Citizen · Columbia, SC · (803) 665-9096 · shashwat06yadav@gmail.com</p>
+      </div>
+      <div class="skills-block">
+        <div>
+          <div class="skill-group-label">Racing / Motorsports</div>
+          <div class="skill-list">
+            <span class="skill-pill">ANSYS Fluent</span>
+            <span class="skill-pill">OpenFOAM</span>
+            <span class="skill-pill">CATIA 3DExperience</span>
+            <span class="skill-pill">CREO Parametric</span>
+            <span class="skill-pill">CFD</span>
+            <span class="skill-pill">Aerodynamic Design</span>
+            <span class="skill-pill">Turbulence Modeling</span>
+            <span class="skill-pill">Downforce & Drag Analysis</span>
+            <span class="skill-pill">Carbon Fiber Fabrication</span>
+            <span class="skill-pill">Wind Tunnel Testing</span>
+            <span class="skill-pill">Vehicle Dynamics</span>
+            <span class="skill-pill">SolidWorks</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-label">Space / Aircraft / Military</div>
+          <div class="skill-list">
+            <span class="skill-pill">MATLAB & Simulink</span>
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">C++</span>
+            <span class="skill-pill">Abaqus FEA</span>
+            <span class="skill-pill">Control Systems Design</span>
+            <span class="skill-pill">UAV Dynamics & Navigation</span>
+            <span class="skill-pill">Adaptive Control</span>
+            <span class="skill-pill">Nonlinear Dynamics Modeling</span>
+            <span class="skill-pill">Robotics & Autonomous Systems</span>
+            <span class="skill-pill">Sensor & Data Acquisition</span>
+            <span class="skill-pill">FEA</span>
+            <span class="skill-pill">Compressible Flow Analysis</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-label">General / Other</div>
+          <div class="skill-list">
+            <span class="skill-pill">JavaScript / HTML / CSS</span>
+            <span class="skill-pill">Microsoft Excel</span>
+            <span class="skill-pill">3D Printing</span>
+            <span class="skill-pill">Circuit Design & Soldering</span>
+            <span class="skill-pill">Experimental Design</span>
+            <span class="skill-pill">Data Analysis</span>
+            <span class="skill-pill">Technical Writing</span>
+            <span class="skill-pill">Team Leadership</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════ CONTACT ═══════════════════════════════════ -->
+<div id="page-contact" class="page">
+  <section>
+    <div class="section-label">Contact</div>
+    <div class="section-title">Get in Touch</div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>I'm currently open to internship opportunities in aerospace, defense, and motorsport — particularly roles involving control systems, aerodynamics, or CFD. Feel free to reach out directly.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:shashwat06yadav@gmail.com">
+            <span class="contact-link-icon">✉</span> shashwat06yadav@gmail.com
+          </a>
+          <a class="contact-link" href="tel:8036659096">
+            <span class="contact-link-icon">↗</span> (803) 665-9096
+          </a>
+          <a class="contact-link" href="https://linkedin.com/in/shashwatyadav06" target="_blank">
+            <span class="contact-link-icon">↗</span> linkedin.com/in/shashwatyadav06
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="section-label" style="margin-bottom:16px;">Education</div>
+        <p style="font-size:15px;color:var(--text);margin-bottom:8px;font-family:'Space Grotesk',sans-serif;font-weight:600;">University of South Carolina Honors College</p>
+        <p style="font-size:14px;color:var(--text-mid);margin-bottom:4px;">B.S. Aerospace Engineering · Class of 2028</p>
+        <p style="font-size:14px;color:var(--text-mid);margin-bottom:4px;">GPA: 4.0</p>
+        <p style="font-size:14px;color:var(--text-mid);margin-bottom:20px;">Minors: Electrical Engineering, Mechanical Engineering, Nuclear Engineering</p>
+        <div class="section-label" style="margin-bottom:16px;">Coursework</div>
+        <div class="skill-list">
+          <span class="skill-pill">Advanced Thermodynamics</span>
+          <span class="skill-pill">Finite Element Analysis</span>
+          <span class="skill-pill">Structures</span>
+          <span class="skill-pill">Compressible Flows</span>
+          <span class="skill-pill">Controls</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" style="display:none">
+    <video id="lightbox-vid" controls style="display:none"></video>
+  </div>
+</div>
+
+<script>
+  // ── PAGE ROUTING ──
+  const pages = ['home','projects','about','contact'];
+  const projects = ['rtmuav','fsae','f1cfd','early'];
+
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    const navEl = document.getElementById('nav-' + name);
+    if (navEl) navEl.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function showProject(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-project-' + id).classList.add('active');
+    document.getElementById('nav-projects').classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // ── MEDIA UPLOAD ──
+  const mediaStores = {};
+
+  function handleUpload(event, projectId) {
+    const files = Array.from(event.target.files);
+    if (!mediaStores[projectId]) mediaStores[projectId] = [];
+    files.forEach(file => {
+      const url = URL.createObjectURL(file);
+      const isVideo = file.type.startsWith('video/');
+      mediaStores[projectId].push({ url, name: file.name, isVideo });
+    });
+    renderMedia(projectId);
+    event.target.value = '';
+  }
+
+  function renderMedia(projectId) {
+    const grid = document.getElementById('media-' + projectId);
+    if (!grid) return;
+    grid.innerHTML = '';
+    (mediaStores[projectId] || []).forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = 'media-item';
+      if (item.isVideo) {
+        div.innerHTML = `<video src="${item.url}" muted playsinline></video>`;
+      } else {
+        div.innerHTML = `<img src="${item.url}" alt="${item.name}">`;
+      }
+      div.innerHTML += `
+        <div class="media-label">${item.name}</div>
+        <button class="remove-btn" onclick="removeMedia('${projectId}',${i},event)">✕</button>
+      `;
+      div.addEventListener('click', () => openLightbox(item));
+      grid.appendChild(div);
+    });
+  }
+
+  function removeMedia(projectId, index, event) {
+    event.stopPropagation();
+    mediaStores[projectId].splice(index, 1);
+    renderMedia(projectId);
+  }
+
+  // ── LIGHTBOX ──
+  function openLightbox(item) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    const vid = document.getElementById('lightbox-vid');
+    if (item.isVideo) {
+      vid.src = item.url; vid.style.display = 'block'; img.style.display = 'none';
+    } else {
+      img.src = item.url; img.style.display = 'block'; vid.style.display = 'none';
+    }
+    lb.classList.add('open');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightbox-vid').pause();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
