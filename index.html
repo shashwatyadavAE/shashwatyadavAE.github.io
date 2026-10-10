@@ -4,349 +4,571 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shashwat Yadav</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px 24px 0 24px; color: #111; }
-  footer { border-top: 1px solid #ccc; margin-top: 48px; padding: 16px 0 24px; font-size: 13px; color: #444; }
-  footer a { color: #444; }
-  nav { border-bottom: 2px solid #111; padding-bottom: 12px; margin-bottom: 32px; }
-  nav a { margin-right: 20px; text-decoration: none; color: #111; font-weight: bold; font-size: 15px; cursor: pointer; }
-  nav a:hover { text-decoration: underline; }
-  h1 { font-size: 32px; margin-bottom: 4px; }
-  h2 { font-size: 20px; border-bottom: 1px solid #ccc; padding-bottom: 6px; margin-top: 40px; }
-  h3 { font-size: 16px; margin-bottom: 4px; }
-  p, li { font-size: 15px; line-height: 1.6; color: #222; }
-  ul { padding-left: 20px; }
+  :root {
+    --bg: #080c14;
+    --bg2: #0d1320;
+    --line: #1a2540;
+    --line2: #0f1829;
+    --blue: #3b82f6;
+    --text: #f8fafc;
+    --text-mid: #94a3b8;
+    --text-dim: #64748b;
+    --text-dark: #475569;
+    --text-darker: #334155;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); font-family: 'Inter', Arial, sans-serif; font-size: 16px; line-height: 1.6; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(8,12,20,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 0 40px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-size: 15px; font-weight: 800; color: var(--text); cursor: pointer; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 12px; font-weight: 600; color: var(--text-dim); text-decoration: none; cursor: pointer; letter-spacing: 0.02em; transition: color 0.15s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+  /* PAGES */
   .page { display: none; }
   .page.active { display: block; }
-  .meta { font-size: 13px; color: #666; margin-bottom: 8px; }
-  .project-card { border: 1px solid #ddd; padding: 16px; margin-bottom: 16px; cursor: pointer; }
-  .project-card:hover { background: #f5f5f5; }
-  .back { cursor: pointer; color: #0066cc; font-size: 14px; margin-bottom: 20px; display: inline-block; }
-  .tag { display: inline-block; background: #eee; padding: 2px 8px; font-size: 12px; margin: 2px; }
-  .award-row { display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid #eee; }
-  .award-year { color: #666; min-width: 40px; font-size: 14px; }
-  .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 12px; }
-  .media-grid img, .media-grid video { width: 100%; display: block; border: 1px solid #ddd; }
-  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 200; align-items: center; justify-content: center; }
+
+  /* HERO */
+  .hero { padding: 56px 40px 44px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+  .hero-grid { position: absolute; inset: 0; opacity: 0.035; background-image: linear-gradient(var(--blue) 1px, transparent 1px), linear-gradient(90deg, var(--blue) 1px, transparent 1px); background-size: 28px 28px; }
+  .hero-eyebrow { font-size: 10px; font-weight: 700; color: var(--text-dim); letter-spacing: 0.14em; margin-bottom: 14px; }
+  .hero-name { font-size: clamp(42px, 6vw, 72px); font-weight: 800; color: var(--text); line-height: 0.92; letter-spacing: -0.02em; margin-bottom: 18px; }
+  .hero-name em { color: var(--blue); font-style: normal; }
+  .hero-desc { font-size: 14px; color: var(--text-dim); line-height: 1.7; max-width: 480px; margin-bottom: 24px; }
+  .hero-btns { display: flex; gap: 10px; }
+  .btn { font-size: 12px; font-weight: 700; padding: 9px 20px; background: var(--blue); color: #fff; border: none; cursor: pointer; transition: opacity 0.15s; }
+  .btn:hover { opacity: 0.85; }
+  .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--text-dim); }
+  .btn-ghost:hover { opacity: 1; border-color: var(--blue); color: var(--text); }
+
+  /* SECTION HEADER */
+  .section-header { padding: 10px 40px 8px; border-bottom: 1px solid var(--line); }
+  .section-lbl { font-size: 10px; font-weight: 700; color: var(--text-dim); letter-spacing: 0.12em; }
+
+  /* PROJECT CARDS — list style */
+  .project-row { border-bottom: 1px solid var(--line); padding: 18px 40px; display: flex; justify-content: space-between; align-items: flex-start; cursor: pointer; transition: background 0.15s; }
+  .project-row:hover { background: var(--bg2); }
+  .project-row:hover .row-arrow { color: var(--blue); }
+  .row-meta { font-size: 10px; color: var(--text-dark); margin-bottom: 4px; }
+  .row-title { font-size: 14px; font-weight: 700; color: #e2e8f0; margin-bottom: 7px; line-height: 1.35; }
+  .row-desc { font-size: 12px; color: var(--text-dim); line-height: 1.65; margin-bottom: 10px; max-width: 580px; }
+  .row-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag { font-size: 10px; border: 1px solid var(--line); color: var(--text-dark); padding: 2px 8px; }
+  .row-arrow { font-size: 16px; color: var(--text-darker); flex-shrink: 0; margin-left: 16px; margin-top: 2px; transition: color 0.15s; }
+
+  /* SKILLS PILL CLOUD */
+  .skills-section { padding: 18px 40px 20px; border-bottom: 1px solid var(--line); }
+  .skills-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .skill-pill { border: 1px solid var(--line); color: var(--text-dim); font-size: 11px; padding: 3px 10px; }
+  .skills-link { font-size: 11px; color: var(--blue); cursor: pointer; }
+  .skills-link:hover { text-decoration: underline; }
+
+  /* AWARDS */
+  .awards-section { padding: 18px 40px 6px; border-bottom: 1px solid var(--line); }
+  .award-row { display: flex; gap: 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--line2); }
+  .award-row:last-child { border-bottom: none; }
+  .award-yr { font-size: 11px; color: var(--blue); min-width: 36px; }
+  .award-body { }
+  .award-name { font-size: 13px; color: var(--text-mid); }
+  .award-org { font-size: 11px; color: var(--text-dark); margin-top: 1px; }
+
+  /* FOOTER */
+  footer { padding: 10px 40px; border-top: 1px solid var(--line); font-size: 11px; color: var(--text-darker); }
+  footer a { color: var(--text-darker); text-decoration: none; }
+  footer a:hover { color: var(--blue); }
+
+  /* PROJECT DETAIL */
+  .proj-hero { padding: 40px 40px 32px; border-bottom: 1px solid var(--line); }
+  .back-btn { font-size: 12px; color: var(--text-dim); background: none; border: none; cursor: pointer; margin-bottom: 28px; display: inline-flex; align-items: center; gap: 6px; padding: 0; transition: color 0.15s; }
+  .back-btn:hover { color: var(--blue); }
+  .proj-meta { font-size: 11px; color: var(--blue); margin-bottom: 10px; }
+  .proj-title { font-size: clamp(24px, 3vw, 40px); font-weight: 800; color: var(--text); line-height: 1.1; margin-bottom: 14px; letter-spacing: -0.01em; }
+  .proj-desc { font-size: 14px; color: var(--text-dim); line-height: 1.75; max-width: 640px; }
+  .proj-body { padding: 40px; }
+  .proj-body h2 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; margin-top: 36px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .proj-body h2:first-child { margin-top: 0; }
+  .proj-body p { font-size: 13px; color: var(--text-dim); line-height: 1.8; margin-bottom: 14px; max-width: 680px; }
+  .proj-body ul { padding-left: 18px; margin-bottom: 14px; }
+  .proj-body li { font-size: 13px; color: var(--text-dim); line-height: 1.8; margin-bottom: 4px; max-width: 660px; }
+  .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 14px; }
+  .media-grid img, .media-grid video { width: 100%; display: block; border: 1px solid var(--line); cursor: pointer; }
+
+  /* SKILLS PAGE */
+  .skills-page-header { padding: 40px 40px 28px; border-bottom: 1px solid var(--line); }
+  .skills-page-title { font-size: 40px; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; }
+  .skills-page-sub { font-size: 13px; color: var(--text-dim); max-width: 520px; }
+  .skill-group { border-bottom: 1px solid var(--line); padding: 18px 40px; }
+  .skill-group-lbl { font-size: 10px; font-weight: 700; color: var(--blue); letter-spacing: 0.12em; margin-bottom: 12px; }
+  .skill-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line2); }
+  .skill-item:last-child { border-bottom: none; }
+  .skill-name { font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 3px; }
+  .skill-desc { font-size: 11px; color: var(--text-dim); line-height: 1.55; max-width: 480px; }
+  .skill-level { font-size: 10px; color: var(--blue); flex-shrink: 0; margin-left: 16px; margin-top: 2px; }
+
+  /* ABOUT PAGE */
+  .about-body { padding: 40px; max-width: 680px; }
+  .about-body h2 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; margin-top: 36px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .about-body h2:first-child { margin-top: 0; }
+  .about-body p { font-size: 14px; color: var(--text-dim); line-height: 1.8; margin-bottom: 12px; }
+
+  /* CONTACT PAGE */
+  .contact-body { padding: 40px; }
+  .contact-body ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .contact-body li { font-size: 14px; color: var(--text-dim); }
+  .contact-body a { color: var(--text-mid); text-decoration: none; }
+  .contact-body a:hover { color: var(--blue); }
+
+  /* LIGHTBOX */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 200; align-items: center; justify-content: center; }
   .lightbox.open { display: flex; }
   .lightbox img, .lightbox video { max-width: 90vw; max-height: 88vh; object-fit: contain; }
   .lightbox-close { position: fixed; top: 16px; right: 20px; background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 20px; }
+    .hero, .section-header, .project-row, .skills-section, .awards-section, footer, .proj-hero, .proj-body, .skills-page-header, .skill-group, .about-body, .contact-body { padding-left: 20px; padding-right: 20px; }
+    .hero-name { font-size: 36px; }
+  }
 </style>
 </head>
 <body>
 
 <nav>
-  <a onclick="showPage('home')">Home</a>
-  <a onclick="showPage('projects')">Projects</a>
-  <a onclick="showPage('about')">About</a>
-  <a onclick="showPage('contact')">Contact</a>
+  <div class="nav-logo" onclick="showPage('home')">Shashwat Yadav</div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('projects')" id="nav-projects">Projects</a></li>
+    <li><a onclick="showPage('skills')" id="nav-skills">Skills</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
 </nav>
 
-<!-- ======================== HOME ======================== -->
+<!-- =============================== HOME =============================== -->
 <div id="page-home" class="page active">
-  <h1>Shashwat Yadav</h1>
-  <p class="meta">Aerospace Engineering, University of South Carolina, Class of 2028</p>
-
-  <p>Aerospace engineering student with experience in control systems, aerodynamics, and CFD. My career goals are to push the boundaries of engineering in areas like space, military aircraft, motorsports, and propulsion, and my projects reflect that, spanning UAV controls research, Formula SAE aerodynamics, and computational studies of Formula 1 cars.</p>
-
-  <h2>Featured Projects</h2>
-  <div class="project-card" onclick="showProject('rtmuav')">
-    <h3>Robust Control Framework for Retractable Tether Multirotor UAVs</h3>
-    <div class="meta">Jan 2025, Present · USC Dynamics and Control Lab</div>
-    <p>Retractable tether UAV systems introduce a fundamentally unsolved controls problem, where the vehicle must remain stable as the tether transitions between slack and taut states mid-flight. I developed a geometric controller with adaptive gains and a novel Low Frequency Learning filter, validated against realistic wind and sensor disturbances. This work earned a NASA SC Space Grant and 2nd Place at the IMECE 2025 ASME Undergraduate Expo.</p>
-    <span class="tag">MATLAB</span><span class="tag">Python</span><span class="tag">Adaptive Control</span><span class="tag">UAV Dynamics</span>
-  </div>
-  <div class="project-card" onclick="showProject('fsae')">
-    <h3>Aerodynamics Team Lead, Formula SAE</h3>
-    <div class="meta">May 2025, Present · SAE at USC</div>
-    <p>After re-establishing the USC Formula SAE program from scratch, I took on the role of Aerodynamics Team Lead, leading a team of 8 engineers toward FSAE Michigan 2027. I oversee the full aerodynamic package, including front wing, rear wing, nose, and sidepods, using ANSYS Fluent CFD and CAD tools, while also managing recruitment, sponsorships, and team onboarding.</p>
-    <span class="tag">ANSYS Fluent</span><span class="tag">CREO Parametric</span><span class="tag">CATIA</span><span class="tag">CFD</span>
-  </div>
-  <div class="project-card" onclick="showProject('f1cfd')">
-    <h3>CFD Study of Crosswind / Yaw Effect on F1 Aerodynamics</h3>
-    <div class="meta">Jun 2026, Oct 2026 · Personal Project</div>
-    <p>A personal project driven by my passion for Formula 1 engineering. I built a 2026-regulation F1 car model in CATIA and ran OpenFOAM CFD simulations across yaw angles from 0 to 8 degrees to study how crosswinds affect downforce, drag, and aerodynamic balance. Results showed minimal L/D degradation up to 8 degrees, with primary effects on yawing moments and aerodynamic center shift.</p>
-    <span class="tag">OpenFOAM</span><span class="tag">CATIA GSD</span><span class="tag">kOmegaSST</span>
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-eyebrow">AEROSPACE ENGINEERING · UNIVERSITY OF SOUTH CAROLINA · CLASS OF 2028</div>
+    <div class="hero-name">Shashwat<br><em>Yadav</em></div>
+    <div class="hero-desc">Aerospace engineering student with experience in control systems, aerodynamics, and CFD. Targeting space, military aircraft, motorsports, and propulsion.</div>
+    <div class="hero-btns">
+      <button class="btn" onclick="showPage('projects')">View Projects</button>
+      <button class="btn btn-ghost" onclick="showPage('contact')">Contact</button>
+    </div>
   </div>
 
-  <h2>Awards</h2>
-  <div class="award-row"><span class="award-year">2026</span><span>NASA SC Space Grant Consortium, Undergraduate Research Award</span></div>
-  <div class="award-row"><span class="award-year">2025</span><span>2nd Place, ASME Undergraduate Expo, IMECE 2025</span></div>
-  <div class="award-row"><span class="award-year">2025</span><span>Magellan Mini Undergraduate Research Grant, USC</span></div>
-  <div class="award-row"><span class="award-year">2022</span><span>Metric System Award, SCJAS</span></div>
+  <div class="section-header"><div class="section-lbl">FEATURED PROJECTS</div></div>
+
+  <div class="project-row" onclick="showProject('rtmuav')">
+    <div>
+      <div class="row-meta">Jan 2025, Present · USC Dynamics and Control Lab</div>
+      <div class="row-title">Robust Control Framework for Retractable Tether Multirotor UAVs</div>
+      <div class="row-desc">Retractable tether UAV systems introduce a fundamentally unsolved controls problem, where the vehicle must remain stable as the tether transitions between slack and taut states mid-flight. I developed a geometric controller with adaptive gains and a novel Low Frequency Learning filter, validated against realistic wind and sensor disturbances.</div>
+      <div class="row-tags"><span class="tag">MATLAB and Simulink</span><span class="tag">Python</span><span class="tag">Control Systems Design</span><span class="tag">UAV Dynamics and Navigation</span><span class="tag">Adaptive Control</span><span class="tag">Sensor and Data Acquisition</span></div>
+    </div>
+    <span class="row-arrow">↗</span>
+  </div>
+
+  <div class="project-row" onclick="showProject('fsae')">
+    <div>
+      <div class="row-meta">May 2025, Present · SAE at USC</div>
+      <div class="row-title">Aerodynamics Team Lead, Formula SAE</div>
+      <div class="row-desc">After re-establishing the USC Formula SAE program from scratch, I took on the role of Aerodynamics Team Lead, leading a team of 8 engineers toward FSAE Michigan 2027. I oversee the full aerodynamic package, including front wing, rear wing, nose, and sidepods, using ANSYS Fluent CFD and CAD tools, while also managing recruitment, sponsorships, and team onboarding.</div>
+      <div class="row-tags"><span class="tag">ANSYS Fluent</span><span class="tag">CATIA 3DExperience</span><span class="tag">CREO Parametric</span><span class="tag">CFD</span><span class="tag">Aerodynamic Design</span><span class="tag">Carbon Fiber Fabrication</span><span class="tag">Vehicle Dynamics</span></div>
+    </div>
+    <span class="row-arrow">↗</span>
+  </div>
+
+  <div class="project-row" onclick="showProject('f1cfd')">
+    <div>
+      <div class="row-meta">Jun 2026, Oct 2026 · Personal Project</div>
+      <div class="row-title">CFD Study of Crosswind / Yaw Effect on F1 Aerodynamics</div>
+      <div class="row-desc">A personal project driven by my passion for Formula 1 engineering. I built a 2026-regulation F1 car model in CATIA and ran OpenFOAM CFD simulations across yaw angles from 0 to 8 degrees to study how crosswinds affect downforce, drag, and aerodynamic balance.</div>
+      <div class="row-tags"><span class="tag">OpenFOAM</span><span class="tag">CATIA 3DExperience</span><span class="tag">CFD</span><span class="tag">Aerodynamic Design</span><span class="tag">Turbulence Modeling</span><span class="tag">Downforce and Drag Analysis</span></div>
+    </div>
+    <span class="row-arrow">↗</span>
+  </div>
+
+  <div class="project-row" onclick="showProject('early')">
+    <div>
+      <div class="row-meta">2021, 2023 · Spring Valley High School</div>
+      <div class="row-title">Early Research, DPF Filtration and Nanoparticle Toxicity</div>
+      <div class="row-desc">Two independent high school research projects, one designing a charged particulate filtration apparatus for diesel particulate filters, and one studying nanoparticle toxicity effects on soil and plant growth. Both were presented at state and university science competitions.</div>
+      <div class="row-tags"><span class="tag">Experimental Design</span><span class="tag">3D Printing</span><span class="tag">Circuit Design and Soldering</span><span class="tag">Data Analysis</span><span class="tag">Technical Writing</span></div>
+    </div>
+    <span class="row-arrow">↗</span>
+  </div>
+
+  <div class="skills-section">
+    <div class="section-lbl" style="margin-bottom:12px;">SKILLS</div>
+    <div class="skills-wrap">
+      <span class="skill-pill">ANSYS Fluent</span><span class="skill-pill">OpenFOAM</span><span class="skill-pill">CATIA 3DExperience</span><span class="skill-pill">CREO Parametric</span><span class="skill-pill">MATLAB and Simulink</span><span class="skill-pill">Python</span><span class="skill-pill">C++</span><span class="skill-pill">Abaqus FEA</span><span class="skill-pill">SolidWorks</span><span class="skill-pill">JavaScript / HTML / CSS</span><span class="skill-pill">CFD</span><span class="skill-pill">Aerodynamic Design</span><span class="skill-pill">Control Systems Design</span><span class="skill-pill">UAV Dynamics and Navigation</span><span class="skill-pill">Adaptive Control</span><span class="skill-pill">Turbulence Modeling</span><span class="skill-pill">Downforce and Drag Analysis</span><span class="skill-pill">Carbon Fiber Fabrication</span><span class="skill-pill">Wind Tunnel Testing</span><span class="skill-pill">Vehicle Dynamics</span><span class="skill-pill">Nonlinear Dynamics Modeling</span><span class="skill-pill">Robotics and Autonomous Systems</span><span class="skill-pill">Sensor and Data Acquisition</span><span class="skill-pill">Compressible Flow Analysis</span><span class="skill-pill">FEA</span><span class="skill-pill">3D Printing</span><span class="skill-pill">Circuit Design and Soldering</span><span class="skill-pill">Experimental Design</span><span class="skill-pill">Data Analysis</span><span class="skill-pill">Technical Writing</span><span class="skill-pill">Team Leadership</span>
+    </div>
+    <div class="skills-link" onclick="showPage('skills')">View full Skills page →</div>
+  </div>
+
+  <div class="awards-section">
+    <div class="section-lbl" style="margin-bottom:10px;">AWARDS AND RECOGNITION</div>
+    <div class="award-row"><span class="award-yr">2026</span><div class="award-body"><div class="award-name">NASA SC Space Grant Consortium, Undergraduate Research Award</div><div class="award-org">RTMUAV Control Research</div></div></div>
+    <div class="award-row"><span class="award-yr">2025</span><div class="award-body"><div class="award-name">2nd Place, ASME Undergraduate Expo, IMECE 2025</div><div class="award-org">RTMUAV Control Research</div></div></div>
+    <div class="award-row"><span class="award-yr">2025</span><div class="award-body"><div class="award-name">Magellan Mini Undergraduate Research Grant</div><div class="award-org">University of South Carolina</div></div></div>
+    <div class="award-row"><span class="award-yr">2022</span><div class="award-body"><div class="award-name">Metric System Award</div><div class="award-org">South Carolina Junior Academy of Science</div></div></div>
+  </div>
+
+  <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
 </div>
 
-<!-- ======================== PROJECTS ======================== -->
+<!-- =============================== PROJECTS =============================== -->
 <div id="page-projects" class="page">
-  <h1>Projects</h1>
-  <div class="project-card" onclick="showProject('rtmuav')">
-    <h3>Robust Control Framework for Retractable Tether Multirotor UAVs</h3>
-    <div class="meta">Jan 2025, Present · USC Dynamics and Control Lab</div>
-    <p>Retractable tether UAV systems introduce a fundamentally unsolved controls problem, where the vehicle must remain stable as the tether transitions between slack and taut states mid-flight. I developed a geometric controller with adaptive gains and a novel Low Frequency Learning filter, validated against realistic wind and sensor disturbances. This work earned a NASA SC Space Grant and 2nd Place at the IMECE 2025 ASME Undergraduate Expo.</p>
-    <span class="tag">MATLAB</span><span class="tag">Python</span><span class="tag">Adaptive Control</span><span class="tag">UAV Dynamics</span>
+  <div class="hero" style="padding-bottom:28px;">
+    <div class="hero-grid"></div>
+    <div class="hero-eyebrow">ALL PROJECTS</div>
+    <div class="hero-name" style="font-size:40px;">Projects</div>
   </div>
-  <div class="project-card" onclick="showProject('fsae')">
-    <h3>Aerodynamics Team Lead, Formula SAE</h3>
-    <div class="meta">May 2025, Present · SAE at USC</div>
-    <p>After re-establishing the USC Formula SAE program from scratch, I took on the role of Aerodynamics Team Lead, leading a team of 8 engineers toward FSAE Michigan 2027. I oversee the full aerodynamic package, including front wing, rear wing, nose, and sidepods, using ANSYS Fluent CFD and CAD tools, while also managing recruitment, sponsorships, and team onboarding.</p>
-    <span class="tag">ANSYS Fluent</span><span class="tag">CREO Parametric</span><span class="tag">CATIA</span><span class="tag">CFD</span>
+
+  <div class="project-row" onclick="showProject('rtmuav')">
+    <div>
+      <div class="row-meta">Jan 2025, Present · USC Dynamics and Control Lab</div>
+      <div class="row-title">Robust Control Framework for Retractable Tether Multirotor UAVs</div>
+      <div class="row-desc">Retractable tether UAV systems introduce a fundamentally unsolved controls problem, where the vehicle must remain stable as the tether transitions between slack and taut states mid-flight. I developed a geometric controller with adaptive gains and a novel Low Frequency Learning filter, validated against realistic wind and sensor disturbances.</div>
+      <div class="row-tags"><span class="tag">MATLAB and Simulink</span><span class="tag">Python</span><span class="tag">Control Systems Design</span><span class="tag">UAV Dynamics and Navigation</span><span class="tag">Adaptive Control</span><span class="tag">Sensor and Data Acquisition</span></div>
+    </div>
+    <span class="row-arrow">↗</span>
   </div>
-  <div class="project-card" onclick="showProject('f1cfd')">
-    <h3>CFD Study of Crosswind / Yaw Effect on F1 Aerodynamics</h3>
-    <div class="meta">Jun 2026, Oct 2026 · Personal Project</div>
-    <p>A personal project driven by my passion for Formula 1 engineering. I built a 2026-regulation F1 car model in CATIA and ran OpenFOAM CFD simulations across yaw angles from 0 to 8 degrees to study how crosswinds affect downforce, drag, and aerodynamic balance. Results showed minimal L/D degradation up to 8 degrees, with primary effects on yawing moments and aerodynamic center shift.</p>
-    <span class="tag">OpenFOAM</span><span class="tag">CATIA GSD</span><span class="tag">kOmegaSST</span>
+
+  <div class="project-row" onclick="showProject('fsae')">
+    <div>
+      <div class="row-meta">May 2025, Present · SAE at USC</div>
+      <div class="row-title">Aerodynamics Team Lead, Formula SAE</div>
+      <div class="row-desc">After re-establishing the USC Formula SAE program from scratch, I took on the role of Aerodynamics Team Lead, leading a team of 8 engineers toward FSAE Michigan 2027. I oversee the full aerodynamic package, including front wing, rear wing, nose, and sidepods, using ANSYS Fluent CFD and CAD tools, while also managing recruitment, sponsorships, and team onboarding.</div>
+      <div class="row-tags"><span class="tag">ANSYS Fluent</span><span class="tag">CATIA 3DExperience</span><span class="tag">CREO Parametric</span><span class="tag">CFD</span><span class="tag">Aerodynamic Design</span><span class="tag">Carbon Fiber Fabrication</span><span class="tag">Vehicle Dynamics</span></div>
+    </div>
+    <span class="row-arrow">↗</span>
   </div>
-  <div class="project-card" onclick="showProject('early')">
-    <h3>Early Research, DPF Filtration and Nanoparticle Toxicity</h3>
-    <div class="meta">2021, 2023 · Spring Valley High School</div>
-    <p>Two independent high school research projects, one designing a charged particulate filtration apparatus for diesel particulate filters, and one studying nanoparticle toxicity effects on soil and plant growth. Both were presented at state and university science competitions.</p>
-    <span class="tag">Experimental Design</span><span class="tag">Hardware Fabrication</span><span class="tag">3D Printing</span>
+
+  <div class="project-row" onclick="showProject('f1cfd')">
+    <div>
+      <div class="row-meta">Jun 2026, Oct 2026 · Personal Project</div>
+      <div class="row-title">CFD Study of Crosswind / Yaw Effect on F1 Aerodynamics</div>
+      <div class="row-desc">A personal project driven by my passion for Formula 1 engineering. I built a 2026-regulation F1 car model in CATIA and ran OpenFOAM CFD simulations across yaw angles from 0 to 8 degrees to study how crosswinds affect downforce, drag, and aerodynamic balance.</div>
+      <div class="row-tags"><span class="tag">OpenFOAM</span><span class="tag">CATIA 3DExperience</span><span class="tag">CFD</span><span class="tag">Aerodynamic Design</span><span class="tag">Turbulence Modeling</span><span class="tag">Downforce and Drag Analysis</span></div>
+    </div>
+    <span class="row-arrow">↗</span>
   </div>
+
+  <div class="project-row" onclick="showProject('early')">
+    <div>
+      <div class="row-meta">2021, 2023 · Spring Valley High School</div>
+      <div class="row-title">Early Research, DPF Filtration and Nanoparticle Toxicity</div>
+      <div class="row-desc">Two independent high school research projects, one designing a charged particulate filtration apparatus for diesel particulate filters, and one studying nanoparticle toxicity effects on soil and plant growth. Both were presented at state and university science competitions.</div>
+      <div class="row-tags"><span class="tag">Experimental Design</span><span class="tag">3D Printing</span><span class="tag">Circuit Design and Soldering</span><span class="tag">Data Analysis</span><span class="tag">Technical Writing</span></div>
+    </div>
+    <span class="row-arrow">↗</span>
+  </div>
+
+  <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
 </div>
 
-<!-- ======================== PROJECT PAGES ======================== -->
+<!-- =============================== PROJECT DETAIL PAGES =============================== -->
 
 <!-- RTMUAV -->
 <div id="page-project-rtmuav" class="page">
-  <span class="back" onclick="showPage('projects')">Back to Projects</span>
-  <h1>Robust Control Framework for Retractable Tether Multirotor UAVs</h1>
-  <p class="meta">Jan 2025, Present · Dynamics and Control Lab, University of South Carolina</p>
-
-  <h2>Overview</h2>
-  <p>Developing a robust control framework for Retractable Tether Multirotor UAVs (RTMUAVs), tackling the unsolved problem of maintaining stability through slack-to-taut tether transitions under real-world disturbances. This work has sharpened my expertise in nonlinear dynamics, adaptive control, and high-fidelity simulation.</p>
-
-  <h2>System Modeling</h2>
-  <ul>
-    <li>Built a fully coupled dynamic model of the UAV, tether, and payload as a unified system, capturing nonlinear interactions across both tether states</li>
-    <li>Tether modeled under slack and taut conditions using a spring-damper model and multilink representation</li>
-    <li>State-switching logic with adaptive gains to handle transition dynamics that destabilize conventional controllers</li>
-  </ul>
-
-  <h2>Controller Design</h2>
-  <ul>
-    <li>Geometric controller with adaptive gains validated in MATLAB against wind and measurement disturbances</li>
-    <li>Implemented Low Frequency Learning (LFL) filter, which outperforms standard MRAC in tracking precision while requiring less control rate effort</li>
-    <li>Python simulation environment mapping expected flight envelopes to safety and clearance regions</li>
-  </ul>
-
-  <h2>Disturbance Modeling</h2>
-  <ul>
-    <li>8-tone gust field applied throughout testing</li>
-    <li>Sensor noise included in tension feedback term</li>
-    <li>Randomized simulations extracting 95th-percentile excursion envelopes across tether lengths of 2 to 6 m</li>
-  </ul>
-
-  <h2>Reeling Platform</h2>
-  <ul>
-    <li>Novel reeling system under 500 to 800 g, tracking tether tension and direction in real time</li>
-    <li>Two-axis gimbal with rotary sensors, and a reel-rotation sensor for deployment and retrieval tracking</li>
-  </ul>
-
-  <h2>Awards and Presentations</h2>
-  <ul>
-    <li>NASA SC Space Grant Consortium Undergraduate Research Award, 2026</li>
-    <li>2nd Place, IMECE 2025 ASME Undergraduate Expo</li>
-    <li>Magellan Mini Undergraduate Research Grant, 2025</li>
-    <li>Presented at IMECE 2025 and Discover USC 2026</li>
-  </ul>
-
-  <h2>Media</h2>
-  <div class="media-grid">
-    <video src="images/RTMUAV/UAV.mp4" controls></video>
-    <video src="images/RTMUAV/ControllerStudy.mp4" controls></video>
+  <div class="proj-hero">
+    <button class="back-btn" onclick="showPage('projects')">← Back to Projects</button>
+    <div class="proj-meta">Jan 2025, Present · Dynamics and Control Lab, University of South Carolina</div>
+    <div class="proj-title">Robust Control Framework for Retractable Tether Multirotor UAVs</div>
+    <div class="proj-desc">Developing a robust control framework for RTMUAVs, tackling the unsolved problem of maintaining stability through slack-to-taut tether transitions under real-world disturbances.</div>
   </div>
+  <div class="proj-body">
+    <h2>Overview</h2>
+    <p>Retractable tether UAV systems offer compelling advantages for persistent aerial operations, but introduce a fundamentally difficult controls problem: the system must remain stable as the tether dynamically transitions between a slack (unconstrained) and taut (tension-loaded) state. No controller framework capable of handling both states robustly in high-risk situations existed prior to this work.</p>
+    <h2>System Modeling</h2>
+    <ul>
+      <li>Built a fully coupled dynamic model of the UAV, tether, and payload as a unified system, capturing nonlinear interactions across both tether states</li>
+      <li>Tether modeled under slack and taut conditions using a spring-damper model and multilink representation</li>
+      <li>State-switching logic with adaptive gains to handle transition dynamics that destabilize conventional controllers</li>
+    </ul>
+    <h2>Controller Design</h2>
+    <ul>
+      <li>Geometric controller with adaptive gains validated in MATLAB against wind and measurement disturbances</li>
+      <li>Implemented Low Frequency Learning (LFL) filter, which outperforms standard MRAC in tracking precision while requiring less control rate effort</li>
+      <li>Python simulation environment mapping expected flight envelopes to safety and clearance regions</li>
+    </ul>
+    <h2>Disturbance Modeling</h2>
+    <ul>
+      <li>8-tone gust field applied throughout testing</li>
+      <li>Sensor noise included in tension feedback term</li>
+      <li>Randomized simulations extracting 95th-percentile excursion envelopes across tether lengths of 2 to 6 m</li>
+    </ul>
+    <h2>Reeling Platform</h2>
+    <ul>
+      <li>Novel reeling system under 500 to 800 g, tracking tether tension and direction in real time</li>
+      <li>Two-axis gimbal with rotary sensors, and a reel-rotation sensor for deployment and retrieval tracking</li>
+    </ul>
+    <h2>Awards and Presentations</h2>
+    <ul>
+      <li>NASA SC Space Grant Consortium Undergraduate Research Award, 2026</li>
+      <li>2nd Place, IMECE 2025 ASME Undergraduate Expo</li>
+      <li>Magellan Mini Undergraduate Research Grant, 2025</li>
+      <li>Presented at IMECE 2025 and Discover USC 2026</li>
+    </ul>
+    <h2>Media</h2>
+    <div class="media-grid">
+      <video src="images/RTMUAV/UAV.mp4" controls></video>
+      <video src="images/RTMUAV/ControllerStudy.mp4" controls></video>
+    </div>
+  </div>
+  <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
 </div>
 
 <!-- FSAE -->
 <div id="page-project-fsae" class="page">
-  <span class="back" onclick="showPage('projects')">Back to Projects</span>
-  <h1>Aerodynamics Team Lead, Formula SAE</h1>
-  <p class="meta">May 2025, Present · Society of Automotive Engineers, University of South Carolina</p>
-
-  <h2>Overview</h2>
-  <p>After re-establishing the USC Formula SAE program from scratch, I took on the role of Aerodynamics Team Lead, leading a team of 8 engineers in designing a full aerodynamic package including front wing, rear wing, nose, and sidepods, targeting FSAE Michigan 2027.</p>
-
-  <h2>Program Development</h2>
-  <ul>
-    <li>Re-established the USC FSAE program from scratch, recruiting, organizing, and leading 8 aerodynamics engineers</li>
-    <li>Procured materials and tools, secured college funding and facility access, and drove industry sponsorships</li>
-    <li>Developed onboarding curriculum to train new members on ANSYS Fluent from zero</li>
-  </ul>
-
-  <h2>Aerodynamic Package Design</h2>
-  <ul>
-    <li>Leading full external aero package design, including front wing, rear wing, nose, and sidepods</li>
-    <li>Surface modeling in CATIA 3DExperience to optimize bodywork geometry before committing to CAD</li>
-    <li>Full vehicle CAD assemblies in CREO Parametric, integrating aero with chassis and suspension</li>
-    <li>100+ hours CREO Parametric, 20+ hours CATIA 3DExperience</li>
-  </ul>
-
-  <h2>CFD</h2>
-  <ul>
-    <li>20+ ANSYS Fluent CFD simulations across iterative bodywork configurations</li>
-    <li>Led team study sessions on turbulence model selection</li>
-    <li>Analyzed vorticity, total pressure loss, and flow profiles across configurations</li>
-  </ul>
-
-  <h2>Manufacturing</h2>
-  <ul>
-    <li>Carbon fiber wet layup, autoclave processing, and fiberglass fabrication</li>
-    <li>Material trade-off analysis across aluminum, fiberglass, and carbon fiber under a limited budget</li>
-    <li>Go-kart development mule assembly for hands-on mechanical familiarity</li>
-  </ul>
-
+  <div class="proj-hero">
+    <button class="back-btn" onclick="showPage('projects')">← Back to Projects</button>
+    <div class="proj-meta">May 2025, Present · Society of Automotive Engineers, University of South Carolina</div>
+    <div class="proj-title">Aerodynamics Team Lead, Formula SAE</div>
+    <div class="proj-desc">After re-establishing the USC Formula SAE program from scratch, I led a team of 8 engineers in designing a full aerodynamic package targeting FSAE Michigan 2027.</div>
+  </div>
+  <div class="proj-body">
+    <h2>Program Development</h2>
+    <ul>
+      <li>Re-established the USC FSAE program from scratch, recruiting, organizing, and leading 8 aerodynamics engineers</li>
+      <li>Procured materials and tools, secured college funding and facility access, and drove industry sponsorships</li>
+      <li>Developed onboarding curriculum to train new members on ANSYS Fluent from zero</li>
+    </ul>
+    <h2>Aerodynamic Package Design</h2>
+    <ul>
+      <li>Leading full external aero package design, including front wing, rear wing, nose, and sidepods</li>
+      <li>Surface modeling in CATIA 3DExperience to optimize bodywork geometry before committing to CAD</li>
+      <li>Full vehicle CAD assemblies in CREO Parametric, integrating aero with chassis and suspension</li>
+      <li>100+ hours CREO Parametric, 20+ hours CATIA 3DExperience</li>
+    </ul>
+    <h2>CFD</h2>
+    <ul>
+      <li>20+ ANSYS Fluent CFD simulations across iterative bodywork configurations</li>
+      <li>Led team study sessions on turbulence model selection</li>
+      <li>Analyzed vorticity, total pressure loss, and flow profiles across configurations</li>
+    </ul>
+    <h2>Manufacturing</h2>
+    <ul>
+      <li>Carbon fiber wet layup, autoclave processing, and fiberglass fabrication</li>
+      <li>Material trade-off analysis across aluminum, fiberglass, and carbon fiber under a limited budget</li>
+      <li>Go-kart development mule assembly for hands-on mechanical familiarity</li>
+    </ul>
+    <h2>Media</h2>
+    <div class="media-grid">
+      <!-- ADD IMAGES AND VIDEOS HERE -->
+      <!-- <img src="images/FSAE/your-image.png" alt="description" onclick="openLightbox(this)"> -->
+    </div>
+  </div>
+  <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
 </div>
 
 <!-- F1 CFD -->
 <div id="page-project-f1cfd" class="page">
-  <span class="back" onclick="showPage('projects')">Back to Projects</span>
-  <h1>CFD Study of Crosswind / Yaw Effect on Aerodynamics of Formula 1 Cars</h1>
-  <p class="meta">Jun 2026, Oct 2026 · Personal Project</p>
-
-  <h2>Overview</h2>
-  <p>Formula 1 is a sport known for its engineering challenges and for maximizing performance out of designs, even for advantages of tenths of a second. Working in this kind of environment is something I would love to be a part of, so I pursued this personal summer project to more deeply explore the aerodynamics of Formula 1 cars, specifically studying the effect of crosswind yaw angles on downforce, drag, and aerodynamic balance.</p>
-
-  <h2>Formula 1 Car Development</h2>
-  <ul>
-    <li>Based on 2026 F1 rules, with some lenient constraints</li>
-    <li>Focused on downforce and drag considerations for the underbody, front wing, and rear wing to ensure a proper model</li>
-    <li>Used CATIA Generative Shape Design to develop an extensive and precise CAD model</li>
-    <li>Compared design with other teams to ensure proper modeling</li>
-  </ul>
-
-  <h2>CFD Setup</h2>
-  <ul>
-    <li>All results simulated through OpenFOAM</li>
-    <li>Car moving at 80,000 mm/s, with constant velocity magnitude held across yaw angles to conserve dynamic pressure</li>
-    <li>Ground velocity modeled only in y-velocity to match the velocity of the car</li>
-    <li>Rotating MRFs around all four wheels</li>
-    <li>Inlet and exhaust not modeled, but kept enclosed due to lack of engine data</li>
-    <li>kOmegaSST turbulence model to properly capture vortex development, flow separation, and viscous effects under yawing conditions</li>
-  </ul>
-
-  <h2>Results</h2>
-  <ul>
-    <li>CL and CD both change proportionally, with CD increasing slightly faster</li>
-    <li>This causes a slight downward drift in the L/D ratio</li>
-    <li>Conclusion: crosswinds up to 8 degrees have no effect on overall L/D ratios of the car, with effects only on yawing moments, forces, and aerodynamic center</li>
-  </ul>
-
-  <h2>0 Degree Results (Baseline)</h2>
-  <div class="media-grid">
-    <img src="images/F1 CFD Study/0/3Dstreamlines.png" alt="0 deg 3D streamlines" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/0/BackPressure.png" alt="0 deg back pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/0/FrontPressure.png" alt="0 deg front pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/0/SidePressure.png" alt="0 deg side pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/0/TopPressure.png" alt="0 deg top pressure" onclick="openLightbox(this)">
+  <div class="proj-hero">
+    <button class="back-btn" onclick="showPage('projects')">← Back to Projects</button>
+    <div class="proj-meta">Jun 2026, Oct 2026 · Personal Project</div>
+    <div class="proj-title">CFD Study of Crosswind / Yaw Effect on Aerodynamics of Formula 1 Cars</div>
+    <div class="proj-desc">Five OpenFOAM simulations across 0 to 8 degree yaw angles on a 2026-regulation F1 car model, studying how crosswinds affect downforce, drag, and aerodynamic center.</div>
   </div>
-
-  <h2>2 Degree Results</h2>
-  <div class="media-grid">
-    <img src="images/F1 CFD Study/2/3Dstreamlines.png" alt="2 deg 3D streamlines" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/2/BackPressure.png" alt="2 deg back pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/2/FrontPressure.png" alt="2 deg front pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/2/SidePressure.png" alt="2 deg side pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/2/TopPressure.png" alt="2 deg top pressure" onclick="openLightbox(this)">
+  <div class="proj-body">
+    <h2>Overview</h2>
+    <p>Formula 1 is a sport known for its engineering challenges and for maximizing performance out of designs, even for advantages of tenths of a second. Working in this kind of environment is something I would love to be a part of, so I pursued this personal summer project to more deeply explore the aerodynamics of Formula 1 cars, specifically studying the effect of crosswind yaw angles on downforce, drag, and aerodynamic balance.</p>
+    <h2>Formula 1 Car Development</h2>
+    <ul>
+      <li>Based on 2026 F1 rules, with some lenient constraints</li>
+      <li>Focused on downforce and drag considerations for the underbody, front wing, and rear wing to ensure a proper model</li>
+      <li>Used CATIA Generative Shape Design to develop an extensive and precise CAD model</li>
+      <li>Compared design with other teams to ensure proper modeling</li>
+    </ul>
+    <h2>CFD Setup</h2>
+    <ul>
+      <li>All results simulated through OpenFOAM</li>
+      <li>Car moving at 80,000 mm/s, with constant velocity magnitude held across yaw angles to conserve dynamic pressure</li>
+      <li>Ground velocity modeled only in y-velocity to match the velocity of the car</li>
+      <li>Rotating MRFs around all four wheels</li>
+      <li>Inlet and exhaust not modeled, but kept enclosed due to lack of engine data</li>
+      <li>kOmegaSST turbulence model to properly capture vortex development, flow separation, and viscous effects under yawing conditions</li>
+    </ul>
+    <h2>Results</h2>
+    <ul>
+      <li>CL and CD both change proportionally, with CD increasing slightly faster</li>
+      <li>This causes a slight downward drift in the L/D ratio</li>
+      <li>Conclusion: crosswinds up to 8 degrees have no effect on overall L/D ratios of the car, with effects only on yawing moments, forces, and aerodynamic center</li>
+    </ul>
+    <h2>0 Degree Results (Baseline)</h2>
+    <div class="media-grid">
+      <img src="images/F1 CFD Study/0/3Dstreamlines.png" alt="0 deg 3D streamlines" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/0/BackPressure.png" alt="0 deg back pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/0/FrontPressure.png" alt="0 deg front pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/0/SidePressure.png" alt="0 deg side pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/0/TopPressure.png" alt="0 deg top pressure" onclick="openLightbox(this)">
+    </div>
+    <h2>2 Degree Results</h2>
+    <div class="media-grid">
+      <img src="images/F1 CFD Study/2/3Dstreamlines.png" alt="2 deg 3D streamlines" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/2/BackPressure.png" alt="2 deg back pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/2/FrontPressure.png" alt="2 deg front pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/2/SidePressure.png" alt="2 deg side pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/2/TopPressure.png" alt="2 deg top pressure" onclick="openLightbox(this)">
+    </div>
+    <h2>4 Degree Results</h2>
+    <div class="media-grid">
+      <img src="images/F1 CFD Study/4/3Dstreamlines.png" alt="4 deg 3D streamlines" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/4/BackPressure.png" alt="4 deg back pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/4/FrontPressure.png" alt="4 deg front pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/4/SidePressure.png" alt="4 deg side pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/4/TopPressure.png" alt="4 deg top pressure" onclick="openLightbox(this)">
+    </div>
+    <h2>6 Degree Results</h2>
+    <div class="media-grid">
+      <img src="images/F1 CFD Study/6/3Dstreamlines.png" alt="6 deg 3D streamlines" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/6/BackPressure.png" alt="6 deg back pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/6/FrontPressure.png" alt="6 deg front pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/6/SidePressure.png" alt="6 deg side pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/6/TopPressure.png" alt="6 deg top pressure" onclick="openLightbox(this)">
+    </div>
+    <h2>8 Degree Results</h2>
+    <div class="media-grid">
+      <img src="images/F1 CFD Study/8/3Dstreamlines.png" alt="8 deg 3D streamlines" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/8/BackPressure.png" alt="8 deg back pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/8/FrontPressure.png" alt="8 deg front pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/8/SidePressure.png" alt="8 deg side pressure" onclick="openLightbox(this)">
+      <img src="images/F1 CFD Study/8/TopPressure.png" alt="8 deg top pressure" onclick="openLightbox(this)">
+    </div>
   </div>
-
-  <h2>4 Degree Results</h2>
-  <div class="media-grid">
-    <img src="images/F1 CFD Study/4/3Dstreamlines.png" alt="4 deg 3D streamlines" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/4/BackPressure.png" alt="4 deg back pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/4/FrontPressure.png" alt="4 deg front pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/4/SidePressure.png" alt="4 deg side pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/4/TopPressure.png" alt="4 deg top pressure" onclick="openLightbox(this)">
-  </div>
-
-  <h2>6 Degree Results</h2>
-  <div class="media-grid">
-    <img src="images/F1 CFD Study/6/3Dstreamlines.png" alt="6 deg 3D streamlines" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/6/BackPressure.png" alt="6 deg back pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/6/FrontPressure.png" alt="6 deg front pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/6/SidePressure.png" alt="6 deg side pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/6/TopPressure.png" alt="6 deg top pressure" onclick="openLightbox(this)">
-  </div>
-
-  <h2>8 Degree Results</h2>
-  <div class="media-grid">
-    <img src="images/F1 CFD Study/8/3Dstreamlines.png" alt="8 deg 3D streamlines" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/8/BackPressure.png" alt="8 deg back pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/8/FrontPressure.png" alt="8 deg front pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/8/SidePressure.png" alt="8 deg side pressure" onclick="openLightbox(this)">
-    <img src="images/F1 CFD Study/8/TopPressure.png" alt="8 deg top pressure" onclick="openLightbox(this)">
-  </div>
+  <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
 </div>
 
 <!-- EARLY RESEARCH -->
 <div id="page-project-early" class="page">
-  <span class="back" onclick="showPage('projects')">Back to Projects</span>
-  <h1>Early Research</h1>
-  <p class="meta">2021, 2023 · Spring Valley High School</p>
-
-  <h2>Diesel Particulate Filter Soot Removal (2022-23)</h2>
-  <p>Designed and built a small-scale test apparatus using carbon black as a soot surrogate, steel wool electrodes, and a 3D-printed honeycomb DPF model to evaluate charged particulate filtration.</p>
-  <ul>
-    <li>End-to-end hardware fabrication including soldering, circuit design, and 3D printing</li>
-    <li>Presented at SCJAS 2023, JSHS 2024, and UofSC Science and Engineering Fair 2023</li>
-  </ul>
-
-  <h2>Nanoparticle Toxicity on Soil and Plant Growth (2021-22)</h2>
-  <p>Controlled 3-week experiment assessing MgO/TiO2 nanoparticle toxicity across two concentration levels in Vigna radiata, measuring soil pH, salinity, and plant height.</p>
-  <ul>
-    <li>Found consistent adverse effects at both concentration levels</li>
-    <li>Metric System Award, SCJAS 2022</li>
-    <li>Presented at SCJAS 2022 and UofSC Science and Engineering Fair 2022</li>
-  </ul>
-
-  <h2>Media</h2>
-  <!-- To add images or videos: upload files to your assets/ folder on GitHub, then add them below like this: -->
-  <!-- <img src="assets/your-image.png" alt="description"> -->
-  <!-- <video src="assets/your-video.mp4" controls></video> -->
-  <div class="media-grid">
-    <!-- ADD IMAGES AND VIDEOS HERE -->
+  <div class="proj-hero">
+    <button class="back-btn" onclick="showPage('projects')">← Back to Projects</button>
+    <div class="proj-meta">2021, 2023 · Spring Valley High School</div>
+    <div class="proj-title">Early Research</div>
+    <div class="proj-desc">Two independent research projects conducted in high school, both presented at competitive science fairs and recognized with awards.</div>
   </div>
+  <div class="proj-body">
+    <h2>Diesel Particulate Filter Soot Removal (2022-23)</h2>
+    <p>Designed and built a small-scale test apparatus using carbon black as a soot surrogate, steel wool electrodes, and a 3D-printed honeycomb DPF model to evaluate charged particulate filtration.</p>
+    <ul>
+      <li>End-to-end hardware fabrication including soldering, circuit design, and 3D printing</li>
+      <li>Presented at SCJAS 2023, JSHS 2024, and UofSC Science and Engineering Fair 2023</li>
+    </ul>
+    <h2>Nanoparticle Toxicity on Soil and Plant Growth (2021-22)</h2>
+    <p>Controlled 3-week experiment assessing MgO/TiO2 nanoparticle toxicity across two concentration levels in Vigna radiata, measuring soil pH, salinity, and plant height.</p>
+    <ul>
+      <li>Found consistent adverse effects at both concentration levels</li>
+      <li>Metric System Award, SCJAS 2022</li>
+      <li>Presented at SCJAS 2022 and UofSC Science and Engineering Fair 2022</li>
+    </ul>
+    <h2>Media</h2>
+    <div class="media-grid">
+      <!-- ADD IMAGES HERE -->
+    </div>
+  </div>
+  <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
 </div>
 
-<!-- ======================== ABOUT ======================== -->
+<!-- =============================== SKILLS =============================== -->
+<div id="page-skills" class="page">
+  <div class="skills-page-header">
+    <div class="skills-page-title">Skills</div>
+    <div class="skills-page-sub">Software tools, engineering disciplines, and technical capabilities built across research and project work.</div>
+  </div>
+
+  <div class="skill-group">
+    <div class="skill-group-lbl">SOFTWARE</div>
+    <div class="skill-item"><div><div class="skill-name">MATLAB and Simulink</div><div class="skill-desc">Primary simulation environment for RTMUAV controller development, adaptive gain tuning, and LFL filter validation against wind and sensor disturbances.</div></div><span class="skill-level">Proficient</span></div>
+    <div class="skill-item"><div><div class="skill-name">CATIA 3DExperience</div><div class="skill-desc">Surface modeling for aerodynamic bodywork optimization for Formula SAE, and full F1 car CAD development using Generative Shape Design.</div></div><span class="skill-level">Proficient</span></div>
+    <div class="skill-item"><div><div class="skill-name">CREO Parametric</div><div class="skill-desc">Full vehicle CAD assemblies integrating aerodynamic components with chassis and suspension geometry for Formula SAE. 100+ hours of experience.</div></div><span class="skill-level">Proficient</span></div>
+    <div class="skill-item"><div><div class="skill-name">ANSYS Fluent</div><div class="skill-desc">20+ CFD simulations across iterative bodywork configurations for the USC Formula SAE aerodynamic package. Led team study sessions on turbulence model selection.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">OpenFOAM</div><div class="skill-desc">5 full simulations across yaw angles 0 to 8 degrees on a 2026-regulation F1 car model, using rotating MRFs and kOmegaSST turbulence modeling.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Python</div><div class="skill-desc">Simulation environment development for RTMUAV flight envelope mapping and safety region analysis.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">C++</div><div class="skill-desc">General programming for embedded and control systems applications.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Abaqus FEA</div><div class="skill-desc">Finite element analysis for structural simulation coursework and design validation.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">SolidWorks</div><div class="skill-desc">3D CAD modeling for mechanical design and component development.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">JavaScript / HTML / CSS</div><div class="skill-desc">Web development, including this portfolio site.</div></div><span class="skill-level">Intermediate</span></div>
+  </div>
+
+  <div class="skill-group">
+    <div class="skill-group-lbl">ENGINEERING DISCIPLINES</div>
+    <div class="skill-item"><div><div class="skill-name">Control Systems Design</div><div class="skill-desc">Geometric controller design with state-switching logic and adaptive gains for the RTMUAV system, validated against real-world disturbances.</div></div><span class="skill-level">Proficient</span></div>
+    <div class="skill-item"><div><div class="skill-name">UAV Dynamics and Navigation</div><div class="skill-desc">Full coupled dynamic modeling of UAV, tether, and payload interactions across slack and taut tether states, including nonlinear effects.</div></div><span class="skill-level">Proficient</span></div>
+    <div class="skill-item"><div><div class="skill-name">Aerodynamic Design</div><div class="skill-desc">Full external aero package design including front wing, rear wing, nose, and sidepods for FSAE competition, and F1 car modeling for crosswind CFD study.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Adaptive Control and State Estimation</div><div class="skill-desc">MRAC and Low Frequency Learning filter implementation, demonstrating improved tracking precision and reduced control effort over standard methods.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Turbulence Modeling</div><div class="skill-desc">kOmegaSST and other turbulence model selection and application across ANSYS Fluent and OpenFOAM simulations.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Nonlinear Dynamics Modeling</div><div class="skill-desc">Coupled dynamic modeling of multi-body systems with nonlinear interactions, including spring-damper and multilink tether representations.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Vehicle Dynamics and Performance Analysis</div><div class="skill-desc">Downforce, drag, and aerodynamic balance analysis across iterative design configurations for motorsport applications.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Compressible Flow Analysis</div><div class="skill-desc">Coursework in compressible flows applied to high-speed aerodynamic design and analysis.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Finite Element Analysis</div><div class="skill-desc">Structural simulation and design validation using Abaqus, with coursework in FEA methods and applications.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Sensor and Data Acquisition</div><div class="skill-desc">Rotary sensor integration and tension measurement systems for the RTMUAV reeling platform.</div></div><span class="skill-level">Intermediate</span></div>
+  </div>
+
+  <div class="skill-group">
+    <div class="skill-group-lbl">MANUFACTURING AND FABRICATION</div>
+    <div class="skill-item"><div><div class="skill-name">Carbon Fiber Fabrication</div><div class="skill-desc">Wet layup, autoclave processing, and fiberglass fabrication for aerodynamic bodywork components.</div></div><span class="skill-level">Beginner</span></div>
+    <div class="skill-item"><div><div class="skill-name">3D Printing and Rapid Prototyping</div><div class="skill-desc">FDM printing for test apparatus fabrication, including a 3D-printed honeycomb DPF model for research hardware.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Circuit Design and Soldering</div><div class="skill-desc">End-to-end hardware fabrication for research test apparatus, including circuit design and soldering.</div></div><span class="skill-level">Intermediate</span></div>
+  </div>
+
+  <div class="skill-group">
+    <div class="skill-group-lbl">PROFESSIONAL</div>
+    <div class="skill-item"><div><div class="skill-name">Team Leadership and Project Management</div><div class="skill-desc">Led a team of 8 engineers as Aerodynamics Team Lead for USC Formula SAE, including recruitment, onboarding curriculum, and sponsorship coordination.</div></div><span class="skill-level">Proficient</span></div>
+    <div class="skill-item"><div><div class="skill-name">Technical Writing and Research</div><div class="skill-desc">Research papers, posters, and presentations across IMECE 2025, Discover USC 2026, SCJAS, and JSHS.</div></div><span class="skill-level">Proficient</span></div>
+    <div class="skill-item"><div><div class="skill-name">Data Analysis</div><div class="skill-desc">Quantitative analysis of CFD results, simulation outputs, and experimental data across research and project work.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Microsoft Excel</div><div class="skill-desc">Data organization, analysis, and reporting for engineering and research applications.</div></div><span class="skill-level">Proficient</span></div>
+  </div>
+
+  <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
+</div>
+
+<!-- =============================== ABOUT =============================== -->
 <div id="page-about" class="page">
-  <h1>About</h1>
-
-  <h2>Background</h2>
-  <p>I am Shashwat Yadav, an aerospace engineering student at the Honors College at the University of South Carolina. I am part of the class of 2028 and currently have a 4.0 GPA. I have minors in electrical engineering, mechanical engineering, and nuclear engineering. I have experience with control systems and avionics engineering through my research in the Dynamics and Control Lab, and I have gained a lot of experience with aerodynamics and CFD studies through my time as the Aerodynamics Team Lead at the Society of Automotive Engineers at the University of South Carolina. My aspirations for my career are to push the boundaries of engineering by working in areas like space, military aircraft, motorsports, and propulsion. I have always been interested in topics like space and hypersonics throughout my life, but especially after high school. Some of my hobbies in my free time include calisthenics, rock climbing, and chess. I also enjoy having personal projects to expand my knowledge on my own with topics like Formula 1, electronics, etc.</p>
-
-  <h2>Education</h2>
-  <p><strong>University of South Carolina</strong> · Aug 2024, Present<br>
-  B.S. Aerospace Engineering · GPA 4.0 · Class of 2028<br>
-  Minors: Electrical Engineering, Mechanical Engineering, Nuclear Engineering<br>
-  Relevant Coursework: Advanced Thermodynamics, Finite Element Analysis, Structures, Compressible Flows, Controls</p>
+  <div class="hero" style="padding-bottom:28px;">
+    <div class="hero-grid"></div>
+    <div class="hero-eyebrow">ABOUT</div>
+    <div class="hero-name" style="font-size:40px;">About</div>
+  </div>
+  <div class="about-body">
+    <h2>Background</h2>
+    <p>I am Shashwat Yadav, an aerospace engineering student at the Honors College at the University of South Carolina. I am part of the class of 2028 and currently have a 4.0 GPA. I have minors in electrical engineering, mechanical engineering, and nuclear engineering. I have experience with control systems and avionics engineering through my research in the Dynamics and Control Lab, and I have gained a lot of experience with aerodynamics and CFD studies through my time as the Aerodynamics Team Lead at the Society of Automotive Engineers at the University of South Carolina. My aspirations for my career are to push the boundaries of engineering by working in areas like space, military aircraft, motorsports, and propulsion. I have always been interested in topics like space and hypersonics throughout my life, but especially after high school. Some of my hobbies in my free time include calisthenics, rock climbing, and chess. I also enjoy having personal projects to expand my knowledge on my own with topics like Formula 1, electronics, etc.</p>
+    <h2>Education</h2>
+    <p><strong style="color:var(--text);">University of South Carolina</strong> · Aug 2024, Present<br>
+    B.S. Aerospace Engineering · GPA 4.0 · Class of 2028<br>
+    Minors: Electrical Engineering, Mechanical Engineering, Nuclear Engineering<br>
+    Relevant Coursework: Advanced Thermodynamics, Finite Element Analysis, Structures, Compressible Flows, Controls</p>
+  </div>
+  <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
 </div>
 
-<!-- ======================== CONTACT ======================== -->
+<!-- =============================== CONTACT =============================== -->
 <div id="page-contact" class="page">
-  <h1>Contact</h1>
-  <ul>
-    <li>Email: <a href="mailto:shashwat06yadav@gmail.com">shashwat06yadav@gmail.com</a></li>
-    <li>School Email: <a href="mailto:yadavs@email.sc.edu">yadavs@email.sc.edu</a></li>
-    <li>Phone: <a href="tel:8036659096">(803) 665-9096</a></li>
-    <li>LinkedIn: <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">linkedin.com/in/shashwatyadav06</a></li>
-    <li>US Citizen</li>
-  </ul>
+  <div class="hero" style="padding-bottom:28px;">
+    <div class="hero-grid"></div>
+    <div class="hero-eyebrow">CONTACT</div>
+    <div class="hero-name" style="font-size:40px;">Get in Touch</div>
+  </div>
+  <div class="contact-body">
+    <ul>
+      <li>Email: <a href="mailto:shashwat06yadav@gmail.com">shashwat06yadav@gmail.com</a></li>
+      <li>School Email: <a href="mailto:yadavs@email.sc.edu">yadavs@email.sc.edu</a></li>
+      <li>Phone: <a href="tel:8036659096">(803) 665-9096</a></li>
+      <li>LinkedIn: <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">linkedin.com/in/shashwatyadav06</a></li>
+      <li>US Citizen</li>
+    </ul>
+  </div>
+  <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
 </div>
-
-<!-- ======================== FOOTER ======================== -->
-<footer>
-  Shashwat Yadav &nbsp;·&nbsp;
-  <a href="mailto:shashwat06yadav@gmail.com">shashwat06yadav@gmail.com</a> &nbsp;·&nbsp;
-  <a href="mailto:yadavs@email.sc.edu">yadavs@email.sc.edu</a> &nbsp;·&nbsp;
-  <a href="tel:8036659096">(803) 665-9096</a> &nbsp;·&nbsp;
-  <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
-  US Citizen
-</footer>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()">X</button>
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
   <div onclick="event.stopPropagation()">
     <img id="lightbox-img" src="" style="display:none">
     <video id="lightbox-vid" controls style="display:none"></video>
@@ -356,21 +578,25 @@
 <script>
   function showPage(name) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById('page-' + name).classList.add('active');
+    const nav = document.getElementById('nav-' + name);
+    if (nav) nav.classList.add('active');
     window.scrollTo(0, 0);
   }
   function showProject(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById('page-project-' + id).classList.add('active');
+    document.getElementById('nav-projects').classList.add('active');
     window.scrollTo(0, 0);
   }
   function openLightbox(el) {
-    const lb = document.getElementById('lightbox');
     const img = document.getElementById('lightbox-img');
     const vid = document.getElementById('lightbox-vid');
     if (el.tagName === 'VIDEO') { vid.src = el.src; vid.style.display='block'; img.style.display='none'; }
     else { img.src = el.src; img.style.display='block'; vid.style.display='none'; }
-    lb.classList.add('open');
+    document.getElementById('lightbox').classList.add('open');
   }
   function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
