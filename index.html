@@ -39,7 +39,7 @@
   .hero-name { font-size: clamp(52px, 7vw, 88px); font-weight: 800; color: var(--text); line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 22px; }
   .hero-name em { color: var(--blue); font-style: normal; }
   .hero-desc { font-size: 16px; color: var(--text-dim); line-height: 1.75; max-width: 560px; margin-bottom: 28px; }
-  .hero-btns { display: flex; gap: 12px; }
+  .hero-btns { display: flex; gap: 12px; position: relative; z-index: 1; }
   .btn { font-size: 13px; font-weight: 700; padding: 11px 24px; background: var(--blue); color: #fff; border: none; cursor: pointer; transition: opacity 0.15s; }
   .btn:hover { opacity: 0.85; }
   .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--text-dim); }
@@ -179,7 +179,7 @@
     <div class="row-left">
       <div class="row-meta">Jan 2025, Present · USC Dynamics and Control Lab</div>
       <div class="row-title">Robust Control Framework for Retractable Tether Multirotor UAVs</div>
-      <div class="row-desc">Retractable tether UAV systems introduce a fundamentally unsolved controls problem, where the vehicle must remain stable as the tether transitions between slack and taut states mid-flight. I developed a geometric controller with adaptive gains and a novel Low Frequency Learning filter, validated against realistic wind and sensor disturbances. This work earned the NASA SC Space Grant Consortium Award and 2nd Place at the IMECE 2025 ASME Undergraduate Expo.</div>
+      <div class="row-desc">Retractable tether UAV systems introduce a fundamentally unsolved controls problem, where the vehicle must remain stable as the tether transitions between slack and taut states mid-flight. I developed a geometric controller with adaptive gains and a novel Low Frequency Learning filter, validated against realistic wind and sensor disturbances. This work earned the NASA SC Space Grant Consortium and 2nd Place at the IMECE 2025 ASME Undergraduate Expo.</div>
       <div class="row-tags"><span class="tag">MATLAB and Simulink</span><span class="tag">Python</span><span class="tag">Control Systems Design</span><span class="tag">UAV Dynamics and Navigation</span><span class="tag">Adaptive Control</span><span class="tag">Sensor and Data Acquisition</span></div>
     </div>
     <span class="row-arrow">↗</span>
@@ -225,7 +225,7 @@
 
   <div class="awards-section">
     <div class="section-lbl" style="margin-bottom:12px;">AWARDS AND RECOGNITION</div>
-    <div class="award-row"><span class="award-yr">2026</span><div><div class="award-name">NASA SC Space Grant Consortium, Undergraduate Research Award</div><div class="award-org">RTMUAV Control Research · Dynamics and Control Lab, USC</div></div></div>
+    <div class="award-row"><span class="award-yr">2026</span><div><div class="award-name">NASA SC Space Grant Consortium</div><div class="award-org">RTMUAV Control Research · Dynamics and Control Lab, USC</div></div></div>
     <div class="award-row"><span class="award-yr">2025</span><div><div class="award-name">2nd Place, ASME Undergraduate Expo, IMECE 2025</div><div class="award-org">RTMUAV Control Research · Dynamics and Control Lab, USC</div></div></div>
     <div class="award-row"><span class="award-yr">2025</span><div><div class="award-name">Magellan Mini Undergraduate Research Grant</div><div class="award-org">University of South Carolina</div></div></div>
     <div class="award-row"><span class="award-yr">2025</span><div><div class="award-name">Undergraduate Conference Grant</div><div class="award-org">University of South Carolina · November 2025</div></div></div>
@@ -361,7 +361,7 @@
 
     <h2>Awards and Presentations</h2>
     <ul>
-      <li>NASA SC Space Grant Consortium, Undergraduate Research Award, 2026</li>
+      <li>NASA SC Space Grant Consortium, 2026</li>
       <li>2nd Place, IMECE 2025 ASME Undergraduate Expo</li>
       <li>Magellan Mini Undergraduate Research Grant, 2025</li>
       <li>Undergraduate Conference Grant, USC, November 2025</li>
