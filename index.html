@@ -210,40 +210,80 @@
 <!-- F1 CFD -->
 <div id="page-project-f1cfd" class="page">
   <span class="back" onclick="showPage('projects')">Back to Projects</span>
-  <h1>CFD Study of Crosswind / Yaw Effect on F1 Aerodynamics</h1>
+  <h1>CFD Study of Crosswind / Yaw Effect on Aerodynamics of Formula 1 Cars</h1>
   <p class="meta">Jun 2026, Oct 2026 · Personal Project</p>
 
   <h2>Overview</h2>
-  <p>Five OpenFOAM simulations across 0 to 8 degree yaw angles on a CAD model built to 2026 F1 regulations, studying how crosswinds affect downforce, drag, and aerodynamic center.</p>
+  <p>Formula 1 is a sport known for its engineering challenges and for maximizing performance out of designs, even for advantages of tenths of a second. Working in this kind of environment is something I would love to be a part of, so I pursued this personal summer project to more deeply explore the aerodynamics of Formula 1 cars, specifically studying the effect of crosswind yaw angles on downforce, drag, and aerodynamic balance.</p>
 
-  <h2>CAD Model</h2>
+  <h2>Formula 1 Car Development</h2>
   <ul>
-    <li>Built in CATIA Generative Shape Design to 2026 F1 regulations</li>
-    <li>Focused on underbody, front wing, and rear wing for downforce and drag accuracy</li>
-    <li>Cross-referenced against comparable models to validate geometry</li>
+    <li>Based on 2026 F1 rules, with some lenient constraints</li>
+    <li>Focused on downforce and drag considerations for the underbody, front wing, and rear wing to ensure a proper model</li>
+    <li>Used CATIA Generative Shape Design to develop an extensive and precise CAD model</li>
+    <li>Compared design with other teams to ensure proper modeling</li>
   </ul>
 
   <h2>CFD Setup</h2>
   <ul>
-    <li>All simulations in OpenFOAM, car velocity 80,000 mm/s</li>
-    <li>Constant velocity magnitude held across yaw angles to conserve dynamic pressure</li>
-    <li>Rotating MRFs on all four wheels</li>
-    <li>kOmegaSST turbulence model for vortex development and flow separation under yaw</li>
+    <li>All results simulated through OpenFOAM</li>
+    <li>Car moving at 80,000 mm/s, with constant velocity magnitude held across yaw angles to conserve dynamic pressure</li>
+    <li>Ground velocity modeled only in y-velocity to match the velocity of the car</li>
+    <li>Rotating MRFs around all four wheels</li>
+    <li>Inlet and exhaust not modeled, but kept enclosed due to lack of engine data</li>
+    <li>kOmegaSST turbulence model to properly capture vortex development, flow separation, and viscous effects under yawing conditions</li>
   </ul>
 
   <h2>Results</h2>
   <ul>
-    <li>CL and CD both increase with yaw angle, with CD increasing slightly faster</li>
-    <li>Slight downward drift in L/D ratio across the range</li>
-    <li>Crosswinds up to 8 degrees have minimal effect on overall L/D, with primary effects on yawing moments and aerodynamic center</li>
+    <li>CL and CD both change proportionally, with CD increasing slightly faster</li>
+    <li>This causes a slight downward drift in the L/D ratio</li>
+    <li>Conclusion: crosswinds up to 8 degrees have no effect on overall L/D ratios of the car, with effects only on yawing moments, forces, and aerodynamic center</li>
   </ul>
 
-  <h2>Media</h2>
-  <!-- To add images or videos: upload files to your assets/ folder on GitHub, then add them below like this: -->
-  <!-- <img src="assets/your-image.png" alt="description"> -->
-  <!-- <video src="assets/your-video.mp4" controls></video> -->
+  <h2>0 Degree Results (Baseline)</h2>
   <div class="media-grid">
-    <!-- ADD IMAGES AND VIDEOS HERE -->
+    <img src="images/F1 CFD Study/0/3Dstreamlines.png" alt="0 deg 3D streamlines" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/0/BackPressure.png" alt="0 deg back pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/0/FrontPressure.png" alt="0 deg front pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/0/SidePressure.png" alt="0 deg side pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/0/TopPressure.png" alt="0 deg top pressure" onclick="openLightbox(this)">
+  </div>
+
+  <h2>2 Degree Results</h2>
+  <div class="media-grid">
+    <img src="images/F1 CFD Study/2/3Dstreamlines.png" alt="2 deg 3D streamlines" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/2/BackPressure.png" alt="2 deg back pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/2/FrontPressure.png" alt="2 deg front pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/2/SidePressure.png" alt="2 deg side pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/2/TopPressure.png" alt="2 deg top pressure" onclick="openLightbox(this)">
+  </div>
+
+  <h2>4 Degree Results</h2>
+  <div class="media-grid">
+    <img src="images/F1 CFD Study/4/3Dstreamlines.png" alt="4 deg 3D streamlines" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/4/BackPressure.png" alt="4 deg back pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/4/FrontPressure.png" alt="4 deg front pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/4/SidePressure.png" alt="4 deg side pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/4/TopPressure.png" alt="4 deg top pressure" onclick="openLightbox(this)">
+  </div>
+
+  <h2>6 Degree Results</h2>
+  <div class="media-grid">
+    <img src="images/F1 CFD Study/6/3Dstreamlines.png" alt="6 deg 3D streamlines" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/6/BackPressure.png" alt="6 deg back pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/6/FrontPressure.png" alt="6 deg front pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/6/SidePressure.png" alt="6 deg side pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/6/TopPressure.png" alt="6 deg top pressure" onclick="openLightbox(this)">
+  </div>
+
+  <h2>8 Degree Results</h2>
+  <div class="media-grid">
+    <img src="images/F1 CFD Study/8/3Dstreamlines.png" alt="8 deg 3D streamlines" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/8/BackPressure.png" alt="8 deg back pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/8/FrontPressure.png" alt="8 deg front pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/8/SidePressure.png" alt="8 deg side pressure" onclick="openLightbox(this)">
+    <img src="images/F1 CFD Study/8/TopPressure.png" alt="8 deg top pressure" onclick="openLightbox(this)">
   </div>
 </div>
 
@@ -345,9 +385,6 @@
     document.getElementById('lightbox').classList.remove('open');
     document.getElementById('lightbox-vid').pause();
   }
-  document.querySelectorAll('.media-grid img, .media-grid video').forEach(el => {
-    el.addEventListener('click', () => openLightbox(el));
-  });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 </script>
 </body>
