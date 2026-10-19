@@ -39,8 +39,8 @@
   .hero-name { font-size: clamp(52px, 7vw, 88px); font-weight: 800; color: var(--text); line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 22px; }
   .hero-name em { color: var(--blue); font-style: normal; }
   .hero-desc { font-size: 16px; color: var(--text-dim); line-height: 1.75; max-width: 560px; margin-bottom: 28px; }
-  .hero-btns { display: flex; gap: 12px; position: relative; z-index: 1; }
-  .btn { font-size: 13px; font-weight: 700; padding: 11px 24px; background: var(--blue); color: #fff; border: none; cursor: pointer; transition: opacity 0.15s; }
+  .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; position: relative; z-index: 1; }
+  .btn { display: inline-block; font-family: inherit; font-size: 13px; font-weight: 700; padding: 11px 24px; background: var(--blue); color: #fff; border: none; cursor: pointer; text-decoration: none; line-height: 1.6; transition: opacity 0.15s; }
   .btn:hover { opacity: 0.85; }
   .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--text-dim); }
   .btn-ghost:hover { opacity: 1; border-color: var(--blue); color: var(--text); }
@@ -169,6 +169,7 @@
     <div class="hero-desc">Aerospace engineering student with experience in control systems, aerodynamics, and CFD. Targeting space, military aircraft, motorsports, and propulsion.</div>
     <div class="hero-btns">
       <button class="btn" onclick="showPage('projects')">View Projects</button>
+      <a class="btn btn-ghost" href="Yadav_Shashwat_Portfolio.pdf" download>Download Portfolio (PDF)</a>
       <button class="btn btn-ghost" onclick="showPage('contact')">Contact</button>
     </div>
   </div>
@@ -191,6 +192,16 @@
       <div class="row-title">Aerodynamics Team Lead, Formula SAE</div>
       <div class="row-desc">After re-establishing the USC Formula SAE program from scratch, I took on the role of Aerodynamics Team Lead, leading a team of 8 engineers toward FSAE Michigan 2027. I oversee the full aerodynamic package, including front wing, rear wing, nose, and sidepods, using ANSYS Fluent CFD and CAD tools, while also managing recruitment, sponsorships, and team onboarding.</div>
       <div class="row-tags"><span class="tag">ANSYS Fluent</span><span class="tag">CATIA 3DExperience</span><span class="tag">CREO Parametric</span><span class="tag">CFD</span><span class="tag">Aerodynamic Design</span><span class="tag">Carbon Fiber Fabrication</span><span class="tag">Vehicle Dynamics</span></div>
+    </div>
+    <span class="row-arrow">↗</span>
+  </div>
+
+  <div class="project-row" onclick="showProject('scramjet')">
+    <div class="row-left">
+      <div class="row-meta">Oct 2026, Present · Personal Project</div>
+      <div class="row-title">Scramjet Supersonic Isolator Unstart and Shock Train Transient Simulation</div>
+      <div class="row-desc">Back-pressure spikes can push a scramjet isolator's shock train upstream and cause inlet unstart. I first matched the steady-state conditions of a UT Austin isolator study in ANSYS Fluent, then used that validated setup to run transient compressible CFD with a linear back-pressure ramp, capturing how the shock system migrates and anchors upstream. A step-function case is in progress.</div>
+      <div class="row-tags"><span class="tag">ANSYS Fluent</span><span class="tag">CFD</span><span class="tag">Compressible Flow Analysis</span><span class="tag">Turbulence Modeling</span><span class="tag">Shock-Boundary Layer Interaction</span></div>
     </div>
     <span class="row-arrow">↗</span>
   </div>
@@ -218,7 +229,7 @@
   <div class="skills-section">
     <div class="section-lbl" style="margin-bottom:14px;">SKILLS</div>
     <div class="skills-wrap">
-      <span class="skill-pill">ANSYS Fluent</span><span class="skill-pill">OpenFOAM</span><span class="skill-pill">CATIA 3DExperience</span><span class="skill-pill">CREO Parametric</span><span class="skill-pill">MATLAB and Simulink</span><span class="skill-pill">Python</span><span class="skill-pill">C++</span><span class="skill-pill">Abaqus FEA</span><span class="skill-pill">SolidWorks</span><span class="skill-pill">JavaScript / HTML / CSS</span><span class="skill-pill">CFD</span><span class="skill-pill">Aerodynamic Design</span><span class="skill-pill">Control Systems Design</span><span class="skill-pill">UAV Dynamics and Navigation</span><span class="skill-pill">Adaptive Control</span><span class="skill-pill">Turbulence Modeling</span><span class="skill-pill">Downforce and Drag Analysis</span><span class="skill-pill">Carbon Fiber Fabrication</span><span class="skill-pill">Wind Tunnel Testing</span><span class="skill-pill">Vehicle Dynamics</span><span class="skill-pill">Nonlinear Dynamics Modeling</span><span class="skill-pill">Robotics and Autonomous Systems</span><span class="skill-pill">Sensor and Data Acquisition</span><span class="skill-pill">Compressible Flow Analysis</span><span class="skill-pill">FEA</span><span class="skill-pill">3D Printing</span><span class="skill-pill">Circuit Design and Soldering</span><span class="skill-pill">Experimental Design</span><span class="skill-pill">Data Analysis</span><span class="skill-pill">Technical Writing</span><span class="skill-pill">Team Leadership</span>
+      <span class="skill-pill">ANSYS Fluent</span><span class="skill-pill">OpenFOAM</span><span class="skill-pill">CATIA 3DExperience</span><span class="skill-pill">CREO Parametric</span><span class="skill-pill">MATLAB and Simulink</span><span class="skill-pill">Python</span><span class="skill-pill">C++</span><span class="skill-pill">Abaqus FEA</span><span class="skill-pill">SolidWorks</span><span class="skill-pill">JavaScript / HTML / CSS</span><span class="skill-pill">CFD</span><span class="skill-pill">Aerodynamic Design</span><span class="skill-pill">Control Systems Design</span><span class="skill-pill">UAV Dynamics and Navigation</span><span class="skill-pill">Adaptive Control</span><span class="skill-pill">Turbulence Modeling</span><span class="skill-pill">Downforce and Drag Analysis</span><span class="skill-pill">Carbon Fiber Fabrication</span><span class="skill-pill">Wind Tunnel Testing</span><span class="skill-pill">Vehicle Dynamics</span><span class="skill-pill">Nonlinear Dynamics Modeling</span><span class="skill-pill">Robotics and Autonomous Systems</span><span class="skill-pill">Sensor and Data Acquisition</span><span class="skill-pill">Compressible Flow Analysis</span><span class="skill-pill">Shock-Boundary Layer Interaction</span><span class="skill-pill">FEA</span><span class="skill-pill">3D Printing</span><span class="skill-pill">Circuit Design and Soldering</span><span class="skill-pill">Experimental Design</span><span class="skill-pill">Data Analysis</span><span class="skill-pill">Technical Writing</span><span class="skill-pill">Team Leadership</span>
     </div>
     <div class="skills-link" onclick="showPage('skills')">View full Skills page →</div>
   </div>
@@ -259,6 +270,16 @@
       <div class="row-title">Aerodynamics Team Lead, Formula SAE</div>
       <div class="row-desc">After re-establishing the USC Formula SAE program from scratch, I took on the role of Aerodynamics Team Lead, leading a team of 8 engineers toward FSAE Michigan 2027. I oversee the full aerodynamic package, including front wing, rear wing, nose, and sidepods, using ANSYS Fluent CFD and CAD tools, while also managing recruitment, sponsorships, and team onboarding.</div>
       <div class="row-tags"><span class="tag">ANSYS Fluent</span><span class="tag">CATIA 3DExperience</span><span class="tag">CREO Parametric</span><span class="tag">CFD</span><span class="tag">Aerodynamic Design</span><span class="tag">Carbon Fiber Fabrication</span><span class="tag">Vehicle Dynamics</span></div>
+    </div>
+    <span class="row-arrow">↗</span>
+  </div>
+
+  <div class="project-row" onclick="showProject('scramjet')">
+    <div class="row-left">
+      <div class="row-meta">Oct 2026, Present · Personal Project</div>
+      <div class="row-title">Scramjet Supersonic Isolator Unstart and Shock Train Transient Simulation</div>
+      <div class="row-desc">Back-pressure spikes can push a scramjet isolator's shock train upstream and cause inlet unstart. I first matched the steady-state conditions of a UT Austin isolator study in ANSYS Fluent, then used that validated setup to run transient compressible CFD with a linear back-pressure ramp, capturing how the shock system migrates and anchors upstream. A step-function case is in progress.</div>
+      <div class="row-tags"><span class="tag">ANSYS Fluent</span><span class="tag">CFD</span><span class="tag">Compressible Flow Analysis</span><span class="tag">Turbulence Modeling</span><span class="tag">Shock-Boundary Layer Interaction</span></div>
     </div>
     <span class="row-arrow">↗</span>
   </div>
@@ -417,6 +438,60 @@
   <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
 </div>
 
+<!-- ═══════════════════════ SCRAMJET ═══════════════════════ -->
+<div id="page-project-scramjet" class="page">
+  <div class="proj-hero">
+    <button class="back-btn" onclick="showPage('projects')">← Back to Projects</button>
+    <div class="proj-meta">Oct 2026, Present · Personal Project</div>
+    <div class="proj-title">Scramjet Supersonic Isolator Unstart and Shock Train Transient Simulation</div>
+    <div class="proj-desc">Transient compressible CFD of a supersonic isolator under controlled back-pressure forcing, built on steady-state conditions matched to a UT Austin isolator study.</div>
+  </div>
+  <div class="proj-body">
+    <h2>Overview</h2>
+    <p>Supersonic inlets and isolators are critical components in scramjet propulsion systems, tasked with diffusing high-speed airflow and establishing a stable pressure gradient prior to the combustor. However, back-pressure spikes can cause the internal shock train to migrate upstream, leading to complete inlet “unstart” and catastrophic thrust collapse. Steady-state behavior is well documented, but capturing the transient relaxation response and shock-train anchoring under specific forcing functions remains a difficult computational problem. The goal of this study is to model and analyze the transient unstart mechanics of a supersonic isolator under controlled forcing conditions to evaluate dynamic stability boundaries.</p>
+
+    <h2>Compressible Flow and Solver Setup (ANSYS Fluent)</h2>
+    <ul>
+      <li>Full compressible Navier-Stokes formulation coupled with the energy equation to resolve severe thermal gradients and shock-boundary layer interactions (SBLI)</li>
+      <li>Ideal gas density law with temperature-dependent molecular viscosity to account for temperature and pressure changes through supersonic flow</li>
+      <li>k-omega SST turbulence model to capture boundary layer separation, large recirculation zones, and the steep adverse pressure gradients of internal shock trains</li>
+      <li>Fine time increments in the transient solver to resolve high-frequency pressure waves without numerical diffusion damping</li>
+    </ul>
+
+    <h2>Steady-State Validation Against UT Austin Study</h2>
+    <ul>
+      <li>Began by matching the steady-state operating conditions of the published UT Austin isolator study before running any transient cases</li>
+      <!-- TODO: replace/add with specifics, e.g. "Compared wall pressure distribution and shock train leading-edge location to the experimental data, within X%" -->
+      <li>Used the converged steady-state solution as the initial condition for the transient simulations, so every transient result starts from a validated baseline</li>
+    </ul>
+
+    <h2>Linear Ramp Transient Simulation</h2>
+    <ul>
+      <li>Applied a linear ramp back-pressure forcing function to simulate progressive downstream throttling and induce gradual upstream shock-train migration</li>
+      <li>Captured the transient progression across 1,000 steps, showing the shock system moving from a nominal downstream position to an upstream-anchored separation structure</li>
+      <li>The results show a growing blockage that constricts the flow, affecting mass flow rate and shock development into the combustor</li>
+    </ul>
+    <div class="media-grid-2col">
+      <div>
+        <video src="images/Scramjet Shock Isolation/mach-animation_linear.mp4" controls muted loop playsinline></video>
+        <div class="media-caption">Mach number, linear back-pressure ramp</div>
+      </div>
+      <div>
+        <video src="images/Scramjet Shock Isolation/pressure-animation_linear.mp4" controls muted loop playsinline></video>
+        <div class="media-caption">Pressure, linear back-pressure ramp</div>
+      </div>
+    </div>
+
+    <h2>Step-Function Transient Simulation (In Progress)</h2>
+    <ul>
+      <li>Evaluates the system response to instantaneous back-pressure spikes rather than gradual ramps, simulating acute flow choking events</li>
+      <li>Essential for finding worst-case propagation speeds and critical time constants for active flow control design and vehicle survivability</li>
+      <li>Will benchmark relaxation time scales and hysteresis effects against the linear ramp baseline to establish operational safety boundaries</li>
+    </ul>
+  </div>
+  <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
+</div>
+
 <!-- ═══════════════════════ F1 CFD ═══════════════════════ -->
 <div id="page-project-f1cfd" class="page">
   <div class="proj-hero">
@@ -543,7 +618,7 @@
     <div class="skill-item"><div><div class="skill-name">MATLAB and Simulink</div><div class="skill-desc">Primary simulation environment for RTMUAV controller development, adaptive gain tuning, and LFL filter validation against wind and sensor disturbances.</div></div><span class="skill-level">Proficient</span></div>
     <div class="skill-item"><div><div class="skill-name">CATIA 3DExperience</div><div class="skill-desc">Surface modeling for aerodynamic bodywork optimization for Formula SAE, and full F1 car CAD development using Generative Shape Design.</div></div><span class="skill-level">Proficient</span></div>
     <div class="skill-item"><div><div class="skill-name">CREO Parametric</div><div class="skill-desc">Full vehicle CAD assemblies integrating aerodynamic components with chassis and suspension geometry for Formula SAE. 100+ hours of experience.</div></div><span class="skill-level">Proficient</span></div>
-    <div class="skill-item"><div><div class="skill-name">ANSYS Fluent</div><div class="skill-desc">20+ CFD simulations across iterative bodywork configurations for the USC Formula SAE aerodynamic package. Led team study sessions on turbulence model selection.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">ANSYS Fluent</div><div class="skill-desc">20+ CFD simulations across iterative bodywork configurations for the USC Formula SAE aerodynamic package, plus steady-state and transient compressible simulations of a scramjet isolator shock train. Led team study sessions on turbulence model selection.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">OpenFOAM</div><div class="skill-desc">5 full simulations across yaw angles 0 to 8 degrees on a 2026-regulation F1 car model, using rotating MRFs and kOmegaSST turbulence modeling.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">Python</div><div class="skill-desc">Simulation environment development for RTMUAV flight envelope mapping and safety region analysis.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">C++</div><div class="skill-desc">General programming for embedded and control systems applications.</div></div><span class="skill-level">Intermediate</span></div>
@@ -560,10 +635,10 @@
     <div class="skill-item"><div><div class="skill-name">UAV Dynamics and Navigation</div><div class="skill-desc">Full coupled dynamic modeling of UAV, tether, and payload interactions across slack and taut tether states, including nonlinear effects.</div></div><span class="skill-level">Proficient</span></div>
     <div class="skill-item"><div><div class="skill-name">Aerodynamic Design</div><div class="skill-desc">Full external aero package design including front wing, rear wing, nose, and sidepods for FSAE competition, and F1 car modeling for crosswind CFD study.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">Adaptive Control and State Estimation</div><div class="skill-desc">MRAC and Low Frequency Learning filter implementation, demonstrating improved tracking precision and reduced control effort over standard methods.</div></div><span class="skill-level">Intermediate</span></div>
-    <div class="skill-item"><div><div class="skill-name">Turbulence Modeling</div><div class="skill-desc">kOmegaSST and other turbulence model selection and application across ANSYS Fluent and OpenFOAM simulations.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Turbulence Modeling</div><div class="skill-desc">kOmegaSST and other turbulence model selection and application across ANSYS Fluent and OpenFOAM simulations, including shock-boundary layer interaction in a scramjet isolator.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">Nonlinear Dynamics Modeling</div><div class="skill-desc">Coupled dynamic modeling of multi-body systems with nonlinear interactions, including spring-damper and multilink tether representations.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">Vehicle Dynamics and Performance Analysis</div><div class="skill-desc">Downforce, drag, and aerodynamic balance analysis across iterative design configurations for motorsport applications.</div></div><span class="skill-level">Intermediate</span></div>
-    <div class="skill-item"><div><div class="skill-name">Compressible Flow Analysis</div><div class="skill-desc">Coursework in compressible flows applied to high-speed aerodynamic design and analysis.</div></div><span class="skill-level">Intermediate</span></div>
+    <div class="skill-item"><div><div class="skill-name">Compressible Flow Analysis</div><div class="skill-desc">Coursework in compressible flows, applied to a scramjet isolator study covering steady-state validation, shock train behavior, and transient unstart under back-pressure forcing.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">Finite Element Analysis</div><div class="skill-desc">Structural simulation and design validation using Abaqus, with coursework in FEA methods and applications.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">Sensor and Data Acquisition</div><div class="skill-desc">Rotary sensor integration and tension measurement systems for the RTMUAV reeling platform.</div></div><span class="skill-level">Intermediate</span></div>
     <div class="skill-item"><div><div class="skill-name">Wind Tunnel Testing</div><div class="skill-desc">Experimental aerodynamic testing and result analysis for design validation.</div></div><span class="skill-level">Intermediate</span></div>
@@ -620,6 +695,7 @@
       <li>School Email: <a href="mailto:yadavs@email.sc.edu">yadavs@email.sc.edu</a></li>
       <li>Phone: <a href="tel:8036659096">(803) 665-9096</a></li>
       <li>LinkedIn: <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">linkedin.com/in/shashwatyadav06</a></li>
+      <li>Portfolio PDF: <a href="Yadav_Shashwat_Portfolio.pdf" download>Download</a></li>
       <li>US Citizen</li>
     </ul>
   </div>
