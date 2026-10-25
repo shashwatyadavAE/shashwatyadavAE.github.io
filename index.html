@@ -101,7 +101,7 @@
   .media-grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; width: 100%; }
   .media-grid-2col video, .media-grid-2col img { width: 100%; display: block; border: 1px solid var(--line); }
   .media-stack { display: flex; flex-direction: column; gap: 28px; margin: 20px -6% 16px; }
-  .media-stack video { width: 100%; display: block; border: 1px solid var(--line); }
+  .media-stack video, .media-stack img { width: 100%; display: block; border: 1px solid var(--line); }
   .media-caption { font-size: 12px; color: var(--text-dark); margin-top: 6px; text-align: center; }
   .media-5col { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 16px; width: 100%; }
   .media-5col img { width: 100%; display: block; border: 1px solid var(--line); cursor: pointer; }
@@ -203,7 +203,7 @@
     <div class="row-left">
       <div class="row-meta">Oct 2026, Present · Personal Project</div>
       <div class="row-title">Scramjet Supersonic Isolator Unstart and Shock Train Transient Simulation</div>
-      <div class="row-desc">Back-pressure spikes can push a scramjet isolator's shock train upstream and cause inlet unstart. I first matched the steady-state conditions of a UT Austin isolator study in ANSYS Fluent, then used that validated setup to run transient compressible CFD with a linear back-pressure ramp, capturing how the shock system migrates and anchors upstream. A step-function case is in progress.</div>
+      <div class="row-desc">Back-pressure spikes can push a scramjet isolator's shock train upstream and cause inlet unstart. In ANSYS Fluent, I set up a Mach 4.9 steady-state isolator flow following a UT Austin experiment, then ran transient compressible CFD with a back-pressure ramp to 200 kPa followed by a hold, capturing how the shock system migrates upstream and settles. Quantitative comparison with the experiment is in progress.</div>
       <div class="row-tags"><span class="tag">ANSYS Fluent</span><span class="tag">CFD</span><span class="tag">Compressible Flow Analysis</span><span class="tag">Turbulence Modeling</span><span class="tag">Shock-Boundary Layer Interaction</span></div>
     </div>
     <span class="row-arrow">↗</span>
@@ -281,7 +281,7 @@
     <div class="row-left">
       <div class="row-meta">Oct 2026, Present · Personal Project</div>
       <div class="row-title">Scramjet Supersonic Isolator Unstart and Shock Train Transient Simulation</div>
-      <div class="row-desc">Back-pressure spikes can push a scramjet isolator's shock train upstream and cause inlet unstart. I first matched the steady-state conditions of a UT Austin isolator study in ANSYS Fluent, then used that validated setup to run transient compressible CFD with a linear back-pressure ramp, capturing how the shock system migrates and anchors upstream. A step-function case is in progress.</div>
+      <div class="row-desc">Back-pressure spikes can push a scramjet isolator's shock train upstream and cause inlet unstart. In ANSYS Fluent, I set up a Mach 4.9 steady-state isolator flow following a UT Austin experiment, then ran transient compressible CFD with a back-pressure ramp to 200 kPa followed by a hold, capturing how the shock system migrates upstream and settles. Quantitative comparison with the experiment is in progress.</div>
       <div class="row-tags"><span class="tag">ANSYS Fluent</span><span class="tag">CFD</span><span class="tag">Compressible Flow Analysis</span><span class="tag">Turbulence Modeling</span><span class="tag">Shock-Boundary Layer Interaction</span></div>
     </div>
     <span class="row-arrow">↗</span>
@@ -447,7 +447,7 @@
     <button class="back-btn" onclick="showPage('projects')">← Back to Projects</button>
     <div class="proj-meta">Oct 2026, Present · Personal Project</div>
     <div class="proj-title">Scramjet Supersonic Isolator Unstart and Shock Train Transient Simulation</div>
-    <div class="proj-desc">Transient compressible CFD of a supersonic isolator under controlled back-pressure forcing, built on steady-state conditions matched to a UT Austin isolator study.</div>
+    <div class="proj-desc">Transient compressible CFD of a supersonic isolator under controlled back-pressure forcing, starting from a Mach 4.9 steady-state baseline set up to follow a UT Austin isolator experiment.</div>
   </div>
   <div class="proj-body">
     <h2>Overview</h2>
@@ -461,35 +461,44 @@
       <li>Fine time increments in the transient solver to resolve high-frequency pressure waves without numerical diffusion damping</li>
     </ul>
 
-    <h2>Steady-State Validation Against UT Austin Study</h2>
+    <h2>Steady-State Baseline (Mach 4.9)</h2>
     <ul>
-      <li>Began by matching the steady-state operating conditions of the published UT Austin isolator study before running any transient cases</li>
-      <!-- TODO: replace/add with specifics, e.g. "Compared wall pressure distribution and shock train leading-edge location to the experimental data, within X%" -->
-      <li>Used the converged steady-state solution as the initial condition for the transient simulations, so every transient result starts from a validated baseline</li>
+      <li>Set up the Mach 4.9 inflow and isolator geometry following the UT Austin inlet-isolator experiment, with a freestream static pressure of about 5 kPa</li>
+      <li>The converged solution shows an oblique shock from the inlet ramp reflecting between the walls and forming a shock train down the duct, with the expected pressure rise across each shock</li>
+      <li>Used this converged solution as the initial condition for the transient cases, so every transient starts from the same steady baseline</li>
+      <!-- TODO: add quantitative comparison to the UT Austin wall pressure data (percent error, shock positions) once the comparison is done -->
+      <li>Quantitative comparison of wall pressure and shock locations against the experimental data is in progress</li>
     </ul>
+    <div class="media-stack">
+      <div>
+        <img src="images/Scramjet Shock Isolation/Steady_State.png" alt="Steady-state static pressure contour of the isolator at Mach 4.9" onclick="openLightbox(this)" style="cursor:pointer">
+        <div class="media-caption">Steady-state static pressure (Pa), Mach 4.9 inflow</div>
+      </div>
+    </div>
 
     <h2>Linear Ramp Transient Simulation</h2>
     <ul>
-      <li>Applied a linear ramp back-pressure forcing function to simulate progressive downstream throttling and induce gradual upstream shock-train migration</li>
-      <li>Captured the transient progression across 1,000 steps, showing the shock system moving from a nominal downstream position to an upstream-anchored separation structure</li>
-      <li>The results show a growing blockage that constricts the flow, affecting mass flow rate and shock development into the combustor</li>
+      <!-- TODO: add ramp rate and total time, e.g. "at X Pa/s over Y ms" -->
+      <li>Starting from the steady baseline, raised the outlet back pressure linearly to a 200 kPa cap, then held it constant until the flow reached a new steady state</li>
+      <li>The ramp simulates progressive downstream throttling and drives the shock train upstream, and the hold shows where the shock system settles once the forcing stops</li>
+      <li>The results show the shock structure moving upstream and a growing separated region constricting the flow, which affects mass flow rate and shock development into the combustor</li>
     </ul>
     <div class="media-stack">
       <div>
         <video src="images/Scramjet Shock Isolation/mach-animation_linear.mp4" controls muted loop playsinline></video>
-        <div class="media-caption">Mach number, linear back-pressure ramp</div>
+        <div class="media-caption">Mach number, back-pressure ramp to 200 kPa and hold</div>
       </div>
       <div>
         <video src="images/Scramjet Shock Isolation/pressure-animation_linear.mp4" controls muted loop playsinline></video>
-        <div class="media-caption">Pressure, linear back-pressure ramp</div>
+        <div class="media-caption">Pressure, back-pressure ramp to 200 kPa and hold</div>
       </div>
     </div>
 
-    <h2>Step-Function Transient Simulation (In Progress)</h2>
+    <h2>Planned Extensions</h2>
     <ul>
-      <li>Evaluates the system response to instantaneous back-pressure spikes rather than gradual ramps, simulating acute flow choking events</li>
-      <li>Essential for finding worst-case propagation speeds and critical time constants for active flow control design and vehicle survivability</li>
-      <li>Will benchmark relaxation time scales and hysteresis effects against the linear ramp baseline to establish operational safety boundaries</li>
+      <li>Quantitative validation of the steady-state wall pressure and shock locations against the UT Austin data</li>
+      <li>Additional forcing cases to see how the shock response changes with the rate of back-pressure rise</li>
+      <li>Benchmarking relaxation time scales and hysteresis against the linear ramp baseline to map operational safety limits</li>
     </ul>
   </div>
   <footer>shashwat06yadav@gmail.com &nbsp;·&nbsp; yadavs@email.sc.edu &nbsp;·&nbsp; (803) 665-9096 &nbsp;·&nbsp; <a href="https://linkedin.com/in/shashwatyadav06" target="_blank">LinkedIn</a> &nbsp;·&nbsp; US Citizen</footer>
